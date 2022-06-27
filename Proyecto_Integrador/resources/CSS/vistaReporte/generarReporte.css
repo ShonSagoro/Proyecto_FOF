@@ -1,0 +1,92 @@
+.Contenido{
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+    width: 130vh;
+}
+
+.Contenido .Subcontenido1 h4{
+    border: none;
+    outline: none;
+    height: 30px;   
+    width: 95vh;
+    color: rgb(56, 40, 12);
+    font-size: 30px;
+    padding: 10px;
+    position: absolute;
+    left: 15%;
+    text-align: center;
+}
+
+.Contenido .Subcontenido1{
+    padding: 0px 0px 50px 0px;
+}
+
+
+.Contenido .Subcontenido2{
+    padding: 20px 0px 0px 0px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.Contenido .Subcontenido2 span{
+    padding: 20px 0px 20px 0px;
+    
+}
+
+.Contenido .Subcontenido2 div #txtDescripcionB{
+    display: block;
+    text-decoration: none;
+    width: 90%;
+    height: 130px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    padding: 10px;
+    color: #1f1f1f;
+}
+
+.Contenido .Subcontenido2 div #txtPrecioB{
+    display: block;
+    text-decoration: none;
+    width: 90%;
+    height: 20px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    padding: 10px;
+    color: #1f1f1f;
+}
+
+.Contenido .Subcontenido3{
+    padding: 20px 0px 0px 0px;
+    display: grid;
+    grid-template-columns: 44% 30% 30%;
+}
+
+.Contenido .Subcontenido3 span{
+    padding: 20px 0px 20px 0px;
+}
+
+.Contenido .Subcontenido3 div #txtDescripcionB{
+    display: block;
+    text-decoration: none;
+    width: 90%;
+    height: 20px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    padding: 10px;
+    color: #1f1f1f;
+}
+
+.Contenido .Subcontenido3 div #txtPrecioB{
+    display: block;
+    text-decoration: none;
+    width: 77%;
+    height: 20px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    padding: 10px;
+    color: #1f1f1f;
+}
