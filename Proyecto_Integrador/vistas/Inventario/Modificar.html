@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../resources/CSS/BarraYOpciones.css">
     <link rel="stylesheet" href="../../resources/CSS/vistaInventario/inventarioModificar.css">
-    <script src="../../resources/JavaScript/inventario/registroProducto.js"></script>
     <title>Inventario Modificar</title>
 </head>
 <body>
@@ -36,7 +35,7 @@
     </div>
     <div class="Contenido">
         <div class="Subcontenido1">
-            <img src="../../resources/Image/iconos figma/magnifying-glass.png">
+            <img id="buscarProducto" src="../../resources/Image/iconos figma/magnifying-glass.png">
             <input id="BuscarTxt" placeholder="Buscar">
         </div>
         
@@ -60,6 +59,9 @@
             <div>
                 <span>Nueva Precio:</span>
                 <input type="text" id="txtPrecioNuevo" placeholder="$00.00">
+                <input type="button" id="btnReemplazar" value="Reemplazar"><br>
+                <input type="button" id="btnEliminar" value="Eliminar">
+                <label id="verificarAccion"></label>
             </div>
         </div>
         <div class="Subcontenido4">
@@ -67,4 +69,5 @@
         </div>
     </div>
 </body>
+<script src="../../resources/JavaScript/inventario/modificar.js"></script>
 </html>

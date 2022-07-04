@@ -64,7 +64,6 @@
     height: 20px;
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
-    padding: 10px;
     color: #1f1f1f;
 }
 .Contenido .Subcontenido3{
@@ -92,14 +91,12 @@
 }
 
 .Contenido .Subcontenido3 div #txtPrecioNuevo{
-    display: block;
+    /* display: block; */
     text-decoration: none;
     background: transparent;
     width: 90%;
     height: 20px;
     border: 1px solid rgb(34, 26, 3);
-    list-style: none;
-    padding: 10px;
     color: #1f1f1f;
 }
 
@@ -107,3 +104,37 @@
     margin-left: 53%;
     opacity: 0.5;
 }
+
+.Contenido .Subcontenido3 div #btnReemplazar{
+    margin-top: 10px;
+    width: 90%;
+    height: 25px;
+    border: none;
+    outline: none;
+    background: #224aec;
+    color: #fff;
+    font-size: 14px;
+}
+.Contenido .Subcontenido3 div #btnReemplazar:hover{
+    cursor: pointer;
+    background: #041568;
+    color: rgb(251, 222, 222);
+}
+
+.Contenido .Subcontenido3 div #btnEliminar{
+    margin-top: 15px;
+    width: 90%;
+    height: 25px;
+    border: none;
+    outline: none;
+    background: #fb0000;
+    color: #fff;
+    font-size: 14px;
+}
+
+.Contenido .Subcontenido3 div #btnEliminar:hover{
+    cursor: pointer;
+    background: #940000;
+    color: rgb(251, 222, 222);
+}
+

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./resources/CSS/stylrRI.css">
+    <link rel="stylesheet" href="./resources/CSS/styleR.css">
+    <link rel="stylesheet" href="./resources/CSS/rolRegistro.css">
     <link rel="icon" type="Image/png" href="./resources/Image/iconos figma/chef.png">
     <title>Registro Sesion</title>
 </head>
@@ -26,12 +27,25 @@
         <label  for="txtPassRC">Confirmar contraseña: </label>
         <!-- Password Confirm-->
         <input id="txtPassRC" type="password" placeholder="Contraseña"> 
-        <label id="validacionRegistro" ></label><br>
+        <label for="rol">¿Quien se registra?</label>
+        <div class="select">
+          <select id="rol">
+              <option value="Vendedor">Vendedor</option>
+              <option value="Cocinero">Cocinero</option>
+              <option value="Dueño">Dueño</option>
+              <option value="Encargado">Encargado</option>
+          </select>
         <!-- submit -->
-        <input type="submit" onclick="Registrar()" value="Registrarse"></input> 
+        <input id="btnRegistro" type="submit" value="Registrarse"></input> 
         <!-- enlace para irse a iniciar sesion -->
+        <label id="validacionRegistro" ></label><br>
         <a href="index.html">¿Ya tienes una cuenta?, inicia sesion</a>
+        
+        </div>
       </div>
+      
 
 </body>
+<script src="./resources/JavaScript/Inicio_Registro/registro.js" type="module"></script>
+
 </html>

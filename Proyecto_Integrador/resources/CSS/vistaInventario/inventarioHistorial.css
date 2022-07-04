@@ -40,7 +40,7 @@
 }
 
 
-.Contenido .Subcontenido2 ul{
+.Contenido .Subcontenido2 #Section_Producto{
     display: block;
     text-decoration: none;
     width: 100%;
@@ -49,7 +49,14 @@
     list-style: none;
     padding: 10px;
     color: #1f1f1f;
+    overflow: hidden;
+    overflow-y: scroll;
     /* transition: all 400ms ease; */
+}
+
+.Contenido .Subcontenido2 div {
+    padding: 2px;
+    
 }
 
 .Contenido .Subcontenido3{
@@ -81,7 +88,7 @@
     height: 20px;
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
-    padding: 10px;
+
     color: #1f1f1f;
 }
 

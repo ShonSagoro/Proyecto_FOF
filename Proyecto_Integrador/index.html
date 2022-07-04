@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./resources/CSS/stylrRI.css">
+    <link rel="stylesheet" href="./resources/CSS/stylrI.css">
     <link rel="icon" type="Image/png" href="./resources/Image/iconos figma/chef.png ">
-    <script src="./resources/JavaScript/inicioSesion.js"></script>  
+    <script src="./resources/JavaScript/Inicio_Registro/inicioSesion.js" type="module"></script>  
     <title>Inicio Sesion</title>
 </head>
 <body>
@@ -18,9 +18,12 @@
         <label class="label">Usuario: </label><input id="txtUser" type="text" placeholder="Usuario" class="input"> <br>
         <label class="label">Contraseña: </label><input id="txtPass" type="password" placeholder="Contraseña" class="input"> <br>
         <label id="validacionInicioSesion" class="labelNegado" ></label><br>
-        <button type="button" onclick="ValidarSesion()" class="button is-dark">Iniciar Sesion</button><br>
+        <button type="button" id="BtnIniciar">Iniciar Sesion</button><br>
         <a href="registro.html">¿No tienes una cuenta?, registrate!</a>
     </div>
+    <script type="text/javascript" src="../probarConexion.js"></script>
     
 </body>
+
+
 </html>
