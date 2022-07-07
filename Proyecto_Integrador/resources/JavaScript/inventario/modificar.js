@@ -56,7 +56,7 @@ const buscarProductoReem=producto=>{
                 let descripcionReem=document.getElementById('DescripcionPR').value;
                 let precioReem=document.getElementById('txtPrecioNuevo').value;
                 if(descripcionReem!='' && precioReem!=''){
-                    if(descripcionReem!==rows[0].descripcion || precioReem!==rows[0].costo){
+                    if(descripcionReem!==rows[3].descripcion || precioReem!==rows[0].costo){
                         conexion.query("UPDATE Producto SET descripcion='"+descripcionReem+"', costo='"+precioReem+"' WHERE id_producto= '"+rows[0].id_producto+"'", (error)=>{
                             if(error){
                                 console.log("algo salio mal");

@@ -13,7 +13,7 @@ const buscarCuenta=(usuario)=>{
             throw error;
         }
         else{
-            if(rows!==undefined){
+            if(rows.length!==0){
                 let contrasenia=document.getElementById("txtPass").value;
                 if(contrasenia===rows[0].contraseña){
                     document.querySelector('#txtUser').value="";

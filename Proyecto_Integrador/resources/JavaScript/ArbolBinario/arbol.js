@@ -81,41 +81,54 @@ class Arbol{
         }
         return null;
     }
-    ordenar_PreOrden(llave){
+    ordenar_PreOrden(llave, array){
         if(llave===null){
             return;
         }
-        console.log(llave.dato.infoProducto());
+        console.log(llave.dato);
+        array.push(llave.dato);
         this.ordenar_PreOrden(llave.izq);
         this.ordenar_PreOrden(llave.der);
+        return array;
     }
 
     mostrar_PreOrden(){
-        this.ordenar_PreOrden(this.raiz);
+        let array=[];
+        array=this.ordenar_PreOrden(this.raiz, array);
+        return array;
     }
-    ordenar_InOrden(llave){
+    ordenar_InOrden(llave, array){
+        
         if(llave===null){
             return;
         }
         this.ordenar_InOrden(llave.izq);
-        console.log(llave.dato.infoProducto());
+        console.log(llave.dato);
+        array.push(llave.dato);
         this.ordenar_InOrden(llave.der);
+        return array;
     }
     
     mostrar_InOrden(){
-        this.ordenar_InOrden(this.raiz);
+        let array=[];
+        array= this.ordenar_InOrden(this.raiz, array);
+        return array;
     }
-    ordenar_PostOrden(llave){
+    ordenar_PostOrden(llave, array){
         if(llave===null){
             return;
         }
         this.ordenar_PostOrden(llave.izq);
         this.ordenar_PostOrden(llave.der);
-        console.log(llave.dato.infoProducto());
+        console.log(llave.dato);
+        array.push(llave.dato);
+        return array;
     }
     
     mostrar_PostOrden(){
-        this.ordenar_PostOrden(this.raiz);
+        let array=[];
+        array= this.ordenar_PostOrden(this.raiz, array);
+        return array;
     }
 
     eliminar(llave){

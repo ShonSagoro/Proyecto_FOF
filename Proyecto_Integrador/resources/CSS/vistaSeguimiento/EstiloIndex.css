@@ -3,299 +3,244 @@
     padding:0;
     box-sizing: border-box;
 }
-body{
-    background-color: aliceblue;
-}
-.buttoon{ 
-    top: 40%;
-    left: 50%;
+
+.opciones{
     position: absolute;
+    top: 35%;
+    left: 50%;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
+    padding: 70px 30px;
 }
-.buttoon h4{
+
+.opciones h4{
     margin: 0;
     padding: 0 0 20px;
     text-align: center;
-    font-size: 30px;   
+    font-size: 30px;    
 }
 
-.buttoon img{
+
+.opciones .Logo_empresa{
     height: 70px;
     padding: 8px;
     position: absolute;
-    top: -70px;
-    left: calc(53% - 50px);  
+    top: 10px;
+    left: calc(53% - 50px);
 }
 
-.buttoon ul {
+.opciones ul{
     display: block;
+    text-decoration: none;
     list-style: none;
-    right: 20%;
+    right: 28%;
     color: #1f1f1f;
     border-left: 5px solid transparent;
     transition: all 400ms ease; 
     position: absolute;
 }
 
-.button1{
-    background-color: #fec63d;
-    text-align: center;
-    text-decoration:none;
-    color: #29323d;
-	font-size: 16px;
-	border-style: none;
-    border-radius: 2px 2px 2px 2px;
-	line-height: 50px;
-    padding: 7px 55px 7px 55px;
-} 
-.button2{
-    padding: 7px 30px 7px 30px;
-    background-color: #fec63d;
-    text-align: center;
-    text-decoration:none;
-    color: #29323d;
-	font-size: 16px;
-	border-style: none;
-    border-radius: 2px 2px 2px 2px;
-	line-height: 50px;
-    /*cursor: pointer;*/
-} 
-.buttoon ul li a:hover { 
-    background: #1a2735;
-    color: #fff; 
-    border-style: none;
-    transition: 0.2s;
-}
 
-/*Punto de Venta*/
-p{
-    font-size: 19px;
-}
-input{
-    margin-bottom:15px;
-    background-color: aliceblue;
-    border-color: #9fb7d1;
-    border-radius: 2px;
-    padding: 5px;
-    width : 400px; 
-    height : 30px
-}
-.contenido{
-    width : 400px; 
-    height : 100px
-}
-button{
-    margin-left: 3.5cm;
+.opciones ul li a input {
+	width: 200px;
+	height: 40px;
     margin-top: 20px;
-    color: #f4f9ff;
-    border-style: none;
-    border-radius: 2px 2px 2px 2px;
-    background-color: #ff9500;
-    padding: 7px 15px 7px 15px;
-    cursor: pointer;
-}
-/*Termina Punto de Venta*/
-
-/*Inicia Historial*/
-table{
-    background-color: #1a2735;
-    color: #f4f9ff;
-    font-size: 20px;
-    margin:70px 20px 0px 20px;
-    width: 97.5%;
-    text-align: center;
-}td{
-    padding: 40px;
-}
-/*Termina historial*/
-
-/*Inicia Realizar Pedido*/
-.tablaMenu{
-    background-color: aliceblue;
-    margin:100px 50px 0px 20px;
-    width: 97.5%;
-    text-align: center;
-}
-
-th{ 
-    font-size: 20px;
-    color: #040404;
-    font-weight:normal;
-}
-
-.total{
-    margin-top: 20px;
-    margin-bottom: 10px;
-    margin-left: 45%;
-}
-.RealizarPedido{
-    margin-left: 45.8%;
-}
-/*Termina Realizar Pedido*/
-
-
-/* Menu*/
-.header{
-    width: 100%;
-    height: 50px;
-    position: fixed;
-    top:0;
-    left: 0;
-    background-color: #2e4f73;
-}
-.container{
-    width: 90%;
-    max-width: 1200px;
-    margin:10px;
-}
-
-.container .btn-menu label{
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-}
-.container .btn-menu{
-    width: 50px;
-}
-
-.container .menu{
-    float: right;
-    line-height: 100px;
-}
-
-.container .menu a{
-    display: inline-block;
-    padding: 15px;
-    line-height: normal;
-    text-decoration: none;
-    color: #fff;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-    font-size: 15px;
-    margin-right: 5px;
-}
-
-.container .menu a:hover{
-    border-bottom: 2px solid #c7c7c7;
-    padding-bottom: 5px;
-}
-
-.container .home img{
-    cursor: pointer;
-    top: 1%;
-    right: 1%;
-	height: 45px;
-    padding: 8px;
-    color: #fff;
-    position: absolute;
-    
-}
-/* menu lateral */
-#btn-menu{
-    display: none;
-}
-.container-menu{
-    position: absolute;
-    /* background: rgba(0,0,0,0.5); */
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    transition: all 500ms ease;
-    opacity: 0;
-    visibility: hidden;
-}
-
-#btn-menu:checked ~ .container-menu{
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.cont-menu{
-    width: 100%;
-    max-width: 250px;
-    background-color: #c1dbf6;
-    height: 100vh;
-    position: relative; 
-    transition: all 500ms ease;
-    transform: translateX(-100%);
-}
-.cont-menu .bloque{
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    color: #1f1f1f;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-#btn-menu:checked ~ .container-menu .cont-menu{
-    transform: translateX(0%);
-} 
-
-.cont-menu .bloque{
-    width: 100%;
-    height: 50px;
-    position: fixed;
-    top:0;
-    left: 0;
-    background-color: #2e4f73;
-}
-
-.cont-menu ul{
-    transform: translateY(47%);
-}
-
-.cont-menu ul a{
-    display: block;
-    text-decoration: none;
-    padding: 20px;
-    color: #1f1f1f;
-    border-left: 5px solid transparent;
-    transition: all 400ms ease;
-    position: relative;
-}
-
-.cont-menu ul a:hover{
-    border-left: 5px solid #2e3c4b ;
-    background-color: #9fb7d1;
-}
-
-.cont-menu label{
-    position: absolute;
-    right: 12px;
-    top: 13px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.cont-menu .btnCerrarSesion {
-    position: absolute;
-    top: 85%;
-    left: 20%;
-	width: 120px;
-	height: 28px;
 	padding: 0px 10px 0px 10px;
-	background: #2e4f73;
-	border-color: #2e4f73;
-    color: #f4f9ff;
+	background: #fec63d;
+	border-color: #fec63d;
+    color: #29323d;
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 2px 2px 2px 2px;
-	font-weight: 700;
-	font-size: 10px;
+	font-weight: 100;
+	font-size: 13px;
 	text-align: center;
 } 
 
-.cont-menu .btnCerrarSesion:hover { 
+.opciones ul li a input:hover { 
     background: #1a2735;
     color: #fff; 
     border-style: double;
     border-color: #c1dbf6;
     transition: 0.2s;
 }
-/*Termina todo del menu*/
 
+.Historial{
+    width: 130vh;
+    height: 79%;
+    padding: 8px;
+    background-color: #15273a;
+    position: absolute;
+    top: 70px;
+    left: calc(25% - 50px);
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.Historial div{
+    color: aliceblue;
+    padding-bottom: 50px;
+}
+
+
+.Contenido{
+    position: absolute;
+    top: 35%;
+    width: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.Contenido h4{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.Contenido #txtLocalizacion{
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    height: 50px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    color: #1f1f1f;
+}
+
+.Contenido #txtLocalizacionV{
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    height: 60px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    color: #1f1f1f;
+}
+
+.Contenido #txtEstado{
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    height: 20px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    color: #1f1f1f;
+}
+
+.Contenido a button{
+    margin-top: 10px;
+    width: 100%;
+    height: 25px;
+    border: none;
+    outline: none;
+    background: #224aec;
+    color: #fff;
+    font-size: 14px;
+}
+
+.Contenido a button:hover{
+    cursor: pointer;
+    background: #041568;
+    color: rgb(251, 222, 222);
+}
+
+.Contenido .Busqueda{
+    padding: 0px 0px 10px 0px;
+    display: grid;
+    grid-template-columns: 95% 5%;
+}
+
+.Contenido .Busqueda input{
+    width: 98%;
+    height: 30px;
+    border: none;
+    text-decoration: none;
+    background: #CCD0DE
+}
+
+
+.Contenido .Busqueda img{
+    height: 20px;
+    cursor: pointer;
+    margin-top: 4px;
+    float: right;
+}
+.contenido{
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.contenido .Subcontenido1{
+    width: 100%;
+    height: 55vh;
+    padding: 20px;
+    background-color: #1f1f1f;
+    border: 1px solid rgb(34, 26, 3);
+    overflow: hidden;
+    overflow-y: scroll;         
+}
+
+.contenido .Subcontenido2 #precioActual{
+   text-align: center;
+   margin-top: 10px;
+}
+
+.contenido .Subcontenido2 input{
+    margin-top: 10px;
+    width: 100%;
+    height: 25px;
+    border: none;
+    outline: none;
+    background: #224aec;
+    color: #fff;
+    font-size: 14px;
+}
+
+.contenido .Subcontenido2 input:hover{
+    cursor: pointer;
+    background: #041568;
+    color: rgb(251, 222, 222);
+}
+
+.contenido li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    margin: 5px 0;
+    background-color: #d9a728;
+    border-radius: 20px;
+}
+
+.contenido li:hover {
+    background: #d96028;
+}
+
+.contenido .liButon {
+    align-items: center;
+    color: white;
+    padding: 10px;
+    border: none;
+    background-color: #d97e28 ;
+    border-radius: 20px;
+}
+
+.contenido .Subcontenido2 #nombrePedido{
+    width: 100%;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    color: #1f1f1f;
+    /* text-decoration: none; */
+    background: #CCD0DE;
+}
