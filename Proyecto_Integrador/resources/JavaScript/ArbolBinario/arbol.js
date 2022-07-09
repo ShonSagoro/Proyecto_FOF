@@ -81,54 +81,47 @@ class Arbol{
         }
         return null;
     }
-    ordenar_PreOrden(llave, array){
+    ordenar_PreOrden(llave){
         if(llave===null){
             return;
         }
         console.log(llave.dato);
-        array.push(llave.dato);
         this.ordenar_PreOrden(llave.izq);
         this.ordenar_PreOrden(llave.der);
-        return array;
     }
 
     mostrar_PreOrden(){
-        let array=[];
-        array=this.ordenar_PreOrden(this.raiz, array);
-        return array;
+        
+        this.ordenar_PreOrden(this.raiz);
+        
     }
     ordenar_InOrden(llave, array){
-        
         if(llave===null){
             return;
         }
         this.ordenar_InOrden(llave.izq);
-        console.log(llave.dato);
-        array.push(llave.dato);
+        console.log(array);
+        // array.push(llave.izq);
         this.ordenar_InOrden(llave.der);
-        return array;
     }
     
     mostrar_InOrden(){
         let array=[];
-        array= this.ordenar_InOrden(this.raiz, array);
+        this.array=this.ordenar_InOrden(this.raiz, array);
         return array;
     }
-    ordenar_PostOrden(llave, array){
+    ordenar_PostOrden(llave){
         if(llave===null){
             return;
         }
         this.ordenar_PostOrden(llave.izq);
         this.ordenar_PostOrden(llave.der);
         console.log(llave.dato);
-        array.push(llave.dato);
-        return array;
+        
     }
     
     mostrar_PostOrden(){
-        let array=[];
-        array= this.ordenar_PostOrden(this.raiz, array);
-        return array;
+        this.ordenar_PostOrden(this.raiz, array);
     }
 
     eliminar(llave){
