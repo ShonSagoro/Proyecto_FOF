@@ -18,9 +18,6 @@
                 <div>
                     <a class="home" href="../../indexCocinero.html"><img src="../../resources/Image/iconos figma/home_blanco.png"></a>
                 </div>
-                <!-- <div>
-                    <a class="home" href="javascript:history.back()" style="float:right"><img src="images/botonRegresar.png" height="33" width="90" alt="Regresar"></a>
-                </div> -->
             </div>
 </div>
 <input type="checkbox" id="btn-menu">
@@ -32,32 +29,23 @@
             <li><a href="./Todos_pedidos.html">Ver lista</a></li>
         </ul>
         <label for="btn-menu">| | |</label>
-        <a a href="index.html"><input type="button" value="Cerrar Sesion" class="btnCerrarSesion"></a>
+        <a a href="../../index.html"><input type="button" value="Cerrar Sesion" class="btnCerrarSesion"></a>
     </div>
-    <div>
+    <!-- <div>
         <h4>BETA version</h4>
-    </div>
+    </div> -->
 </div>
-<scroll-container>
-<div class="Contenido">
+<div class="contenido">
+    <label id="PedidoActual">Pedido actual: </label>
     <div class="Subcontenido1">
-        <h4>id_pedido</p></h4>
+        <ul id="PedidoActual">
+
+        </ul>
     </div>
     <div class="Subcontenido2">
-        <div>
-            <span>Lista de Pedidos:</span>
-            <label id="txtDescripcionB"><a>=> Producto 1:<br>[info base de datos]</a></label>
-            <label id="txtDescripcionB">=> Producto 2:<br>[info base de datos]</label>
-            <label id="txtDescripcionB">=> Producto 3:<br>[info base de datos]</label>
-            <label id="txtDescripcionB">=> Producto 4:<br>[info base de datos]</label>
-            <label id="txtDescripcionB"></label>
-            <label id="txtDescripcionB"></label>
-            <label id="txtDescripcionB"></label>
-            <label id="txtDescripcionB"></label>
-            <label id="txtDescripcionB"></label>
-        </div>
+        <input type="button" value="COMPLETADO" id="pedidoCompletado">
     </div>
-</scroll-container>
 </div>
+<script src="../../resources/JavaScript/Cocinero/mostrarPedido.js" type="module"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+let arrayDatos=[];
 class NodoArbol{
     constructor(llave, dato){
         this.llave=llave;
@@ -10,6 +11,7 @@ class NodoArbol{
 class Arbol{
     constructor(){
         this.raiz=null;
+        this.array=[];
     }
 
     tieneRaiz(){
@@ -47,8 +49,7 @@ class Arbol{
         }
     }
     buscar_dato(llave){
-        if(llave===null){
-            console.log("entre a nulo, no valgo nada");
+        if(this.raiz===null ||llave===null){
             return null;
         }
         let actual=this.raiz;
@@ -59,7 +60,6 @@ class Arbol{
                 actual=actual.izq;
             }
             if(actual===null){
-                console.log("No estoy");
                 return null;
             }
         }
@@ -70,58 +70,59 @@ class Arbol{
         let minimo=this.buscar_minimo(this.raiz);
         return minimo;
     }
-    buscar_minimo(llave){
-        let anterior=llave;
+    buscar_minimo(nodo){
+        let anterior=nodo;
         if(!this.tieneRaiz()){
-            while(llave!=null){
-                anterior=llave;
-                llave=llave.izq;
+            while(nodo!=null){
+                anterior=nodo;
+                nodo=nodo.izq;
             }
         return anterior;
         }
         return null;
     }
-    ordenar_PreOrden(llave){
-        if(llave===null){
+    ordenar_PreOrden(nodo){
+        if(nodo===null){
             return;
         }
-        console.log(llave.dato);
-        this.ordenar_PreOrden(llave.izq);
-        this.ordenar_PreOrden(llave.der);
+        // console.log(nodo.dato);
+        arrayDatos.push(nodo.dato);
+        this.ordenar_PreOrden(nodo.izq);
+        this.ordenar_PreOrden(nodo.der);
     }
 
     mostrar_PreOrden(){
-        
+        arrayDatos=[];
         this.ordenar_PreOrden(this.raiz);
-        
     }
-    ordenar_InOrden(llave, array){
-        if(llave===null){
+
+    ordenar_InOrden(nodo){
+        if(nodo===null){
             return;
         }
-        this.ordenar_InOrden(llave.izq);
-        console.log(array);
-        // array.push(llave.izq);
-        this.ordenar_InOrden(llave.der);
+        this.ordenar_InOrden(nodo.izq);
+        // console.log(nodo.dato);
+        arrayDatos.push(nodo.dato);
+        this.ordenar_InOrden(nodo.der);
     }
     
     mostrar_InOrden(){
-        let array=[];
-        this.array=this.ordenar_InOrden(this.raiz, array);
-        return array;
+        arrayDatos=[];
+        this.ordenar_InOrden(this.raiz);
     }
-    ordenar_PostOrden(llave){
-        if(llave===null){
+    ordenar_PostOrden(nodo){
+        if(nodo===null){
             return;
         }
-        this.ordenar_PostOrden(llave.izq);
-        this.ordenar_PostOrden(llave.der);
-        console.log(llave.dato);
-        
+        this.ordenar_PostOrden(nodo.izq);
+        this.ordenar_PostOrden(nodo.der);
+        // console.log(nodo.dato);
+        arrayDatos.push(nodo.dato);
     }
     
     mostrar_PostOrden(){
-        this.ordenar_PostOrden(this.raiz, array);
+        arrayDatos=[];
+        this.ordenar_PostOrden(this.raiz);
     }
 
     eliminar(llave){
@@ -218,9 +219,7 @@ class Arbol{
         }
         return nodoRemplazado;
     }
-    
-    
 }
 
 
-export {NodoArbol, Arbol};
+export {NodoArbol, Arbol, arrayDatos};

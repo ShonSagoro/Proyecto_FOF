@@ -1,5 +1,5 @@
 const conexion=require('../../../conectar.js');
-import {Arbol} from '../ArbolBinario/arbol.js';
+import {Arbol, arrayDatos} from '../ArbolBinario/arbol.js';
 // class Producto{
 //     constructor(id,nombre, descripcion, costo){
 //         this.id=id;
@@ -24,33 +24,21 @@ const mostrarListaProductos=()=>{
         if(error){
             throw error;
         }else{
-            let array=[];
-            // console.log("entre");
             let long= rows.length
-            // console.log(long);
             for(let i=0; i<long; i++){
                 arbolProducto.add(rows[i].nombre, rows[i]);
-                // console.log("entre");
-                // console.log(rows[i]);
-                // const productoR=document.createElement('div');
-                // productoR.textContent=rows[i].nombre;
-                // contenedorProductos.prepend(productoR);
             }
-            array=arbolProducto.mostrar_InOrden();
-            console.log(array);
-            
+            arbolProducto.mostrar_InOrden();
+            console.log(arrayDatos);
+            for(let i=0; i<long; i++){
+                const productoR=document.createElement('div');
+                productoR.textContent=arrayDatos[i].nombre;
+                contenedorProductos.append(productoR);
+                //prepend coloca antes del final ||append coloca al final
+            }
         }   
     });
     
-    // console.log(arbolInorden);
-    //         for(let i=0; i<4; i++){
-
-    //         }
-    // for(i=0; i<listaProductos.length;i++){
-    //     const productoR=document.createElement('div');
-    //     productoR.textContent=listaProductos[i].nombre;
-    //     contenedorProductos.prepend(productoR);
-    // }
 }
 
 botonBuscar.addEventListener('click',()=>{  

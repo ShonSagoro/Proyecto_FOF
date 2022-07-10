@@ -13,7 +13,7 @@ botonBuscarVendedor.addEventListener('click',()=>{
 
 
 const buscarPuntoVenta=nombreV=>{
-    conexion.query(`SELECT * FROM Punto_venta WHERE nombre_vendedor='${nombreV}'`,(error, rows, fields)=>{
+    conexion.query(`SELECT ubicacion FROM Cuenta WHERE usuario='${nombreV}' AND rol='Vendedor'`,(error, rows, fields)=>{
         if(error){
             throw error;
         }else{

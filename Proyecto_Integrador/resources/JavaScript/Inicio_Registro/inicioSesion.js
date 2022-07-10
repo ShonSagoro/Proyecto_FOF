@@ -20,15 +20,19 @@ const buscarCuenta=(usuario)=>{
                     document.querySelector('#txtPass').value="";
                     switch (rows[0].rol) {
                         case "Encargado":
+                            localStorage.setItem('usuario',JSON.stringify(usuario));
                             window.location.assign("indexInventario.html");
                             break;
                         case "Cocinero":
+                            localStorage.setItem('usuario',JSON.stringify(usuario));
                             window.location.assign("indexCocinero.html");
                             break;
                         case "Dueño":
+                            localStorage.setItem('usuario',JSON.stringify(usuario));
                             window.location.assign("indexReporte.html");
                             break;
                         case "Vendedor":
+                            localStorage.setItem('usuario',JSON.stringify(usuario));
                             window.location.assign("indexVendedor.html");
                             break;
                         default:
