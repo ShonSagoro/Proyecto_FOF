@@ -145,7 +145,7 @@ class Arbol{
                 return false;
             }
         }
-        console.log(actual);
+        // console.log(actual);
 
         if(actual.izq===null && actual.der===null){
             console.log("caso 1");

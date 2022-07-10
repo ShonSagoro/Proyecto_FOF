@@ -1,6 +1,6 @@
 .Contenido{
     position: absolute;
-    top: 50%;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
@@ -8,36 +8,75 @@
     width: 130vh;
 }
 
-.Contenido label{
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-size: 22px;
-}
-
 .Contenido .Subcontenido1{
     width: 100%;
-    height: 75vh;
+    height: 55vh;
     padding: 20px;
-    background-color: #1f1f1f;
-    border: 1px solid rgb(34, 26, 3);
-    overflow: hidden;
-    overflow-y: scroll;  
+    background-color: #0e0f1b;
+    border: 1px solid rgb(26, 3, 34);
+    /* overflow: hidden;
+    overflow-y: scroll;   */
 }
 
-.Contenido input[type="button"] {
-    margin-top: 10px;
-    width: 100%;
-    align-items: center;
-    color: white;
+.Contenido .Subcontenido1 ul{
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    width: 80%;
+}
+
+.Contenido li {
+    list-style: none;
+    border-radius: 15px;
     padding: 10px;
-    border: none;
-    background-color: #d97e28 ;
+    color: white;
+    margin: 5px 0;
+    background-color: #d9a728;
     border-radius: 20px;
 }
 
-.Contenido input[type="button"]:hover{
-    cursor: pointer;
-    background-color: #7b410c ;
+.Contenido .P0{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 40px;
+    color: white;
+    margin: 5px 0;
+    justify-content: center;
+    background-color:transparent;
+    border-radius: 20px;
+}
+.Contenido .P0:hover {
+    background-color: #06070c;
 }
 
+.Contenido li .productoDiv{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    padding: 10px;  
+}
+
+.Contenido li:hover {
+    background: #d96028;
+}
+
+.Contenido .Subcontenido2 input{
+    margin-top: 10px;
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    background: #224aec;
+    color: #fff;
+    font-size: 14px;
+}
+
+.Contenido .Subcontenido2 input:hover{
+    cursor: pointer;
+    background: #041568;
+    color: rgb(251, 222, 222);
+}

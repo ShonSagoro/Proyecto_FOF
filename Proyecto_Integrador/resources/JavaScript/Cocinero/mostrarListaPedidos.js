@@ -1,7 +1,6 @@
 const conexion=require('../../../conectar.js');
 import {Arbol, arrayDatos} from '../ArbolBinario/arbol.js';
 const lista=document.querySelector('#orden_pedido');
-let producto=[];
 let arbolPedidos=new Arbol();
 
 //actualizar arbol
@@ -13,8 +12,8 @@ const cargarPedido=()=>{
         }else{
             let long=rows.length;
             for(let i=0;i<long;i++){
-                if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null){
-                    arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
+                if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado!=='completado'){
+                  arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
                 }
             }
         }
@@ -27,7 +26,8 @@ const cargarPedido=()=>{
             }else{
                 let long=rows.length;
                 for(let i=0;i<long;i++){
-                    if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null){
+                    console.log(rows[i].estado);
+                    if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado!=='completado'){
                         arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
                     }
                 }
@@ -56,32 +56,14 @@ const buscarIdProducto=(idPedido, nombrePedido)=>{
                 elemento+=
                 `
                     <div class="productoDiv">
-                        <p>${rows[i].nombre}</p>
-                        <p>|||</p>
-                        <p>Cantidad: ${rows[i].cantidad_producto}</p>
-                    <div>
+                        <p>- ${rows[i].nombre} ||| Cantidad: ${rows[i].cantidad_producto} </p>
+                    </div>
                 `;
             }
             elemento+=`</li>`;
             lista.insertAdjacentHTML("beforeend",elemento);
         }
     });
-    setInterval(() => {
-        console.log('entre')
-        conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
-            if(error){
-                throw error;
-            }else{
-                let long=rows.length;
-                for(let i=0;i<long;i++){
-                    if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null){
-                        arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
-                    }
-                }
-            }
-        });
-    }, 300000);//300000===5 minutos
-
 }
 
 
@@ -92,11 +74,22 @@ const agregarLista=()=>{
             throw error;
         }else{
             arbolPedidos.mostrar_PreOrden();
-            for(let i=0;i<arrayDatos.length;i++){
-                if(arrayDatos[i].estado!=='completado'){
-                    buscarIdProducto(arrayDatos[i].id_pedido,arrayDatos[i].nombre_pedido); 
+            //solo hara una unica vez el sacar los datos
+            if(arrayDatos.length!==0){
+                for(let i=0; i<arrayDatos.length;i++){
+                    if(arrayDatos[0].estado!=='completado'){
+                        //buscamos el id de los productos para agregar los datos
+                        buscarIdProducto(arrayDatos[i].id_pedido, arrayDatos[i].nombre_pedido); 
+                    }
                 }
-            }            
+            }else{
+                const elemento=`
+                    <li class='P0'>
+                        <p class="text"> Sin pedidos </p>
+                    </li>
+                `;
+                lista.insertAdjacentHTML("beforeend",elemento);
+            }          
         }
     });
 }
