@@ -31,6 +31,13 @@ CREATE TABLE IF NOT EXISTS Pedido(
 	PRIMARY KEY (id_pedido)
 ) ENGINE = INNODB;
 
+CREATE TABLE IF NOT EXISTS Venta(
+    id_venta  INT NOT NULL auto_increment,
+    cantidad_precio INT NOT NULL,
+    fecha DATE NOT NULL,
+	PRIMARY KEY (id_venta)
+) ENGINE = INNODB;
+
 DROP TABLE Cuenta;
 DROP TABLE Punto_venta;
 
@@ -96,19 +103,34 @@ select * from Producto;
 select * from Cuenta;
 select * from Pedido;
 select * from Pedido_producto;
-
+DELETE FROM Pedido WHERE id_pedido='8';
 SELECT *
 FROM Pedido_producto
 INNER JOIN producto
-ON Pedido_producto.producto_id_producto=producto.id_producto;
-DROP TABLE pedido;
-DROP TABLE Pedido_producto;
+ON Pedido_producto.producto_id_producto=producto.id_producto WHERE producto_id_producto='3';
+
+SELECT *
+FROM Pedido_producto
+    INNER JOIN Producto
+    ON Pedido_producto.producto_id_producto=producto.id_producto WHERE pedido_id_pedido='3';
+    
+SELECT *
+FROM Pedido_producto
+INNER JOIN Producto
+ON Pedido_producto.producto_id_producto=Producto.id_producto WHERE producto_id_producto='2';
+
 SELECT * FROM pedido;
 UPDATE Pedido SET estado='pendiente' WHERE id_pedido='1';
 UPDATE Pedido SET estado='pendiente' WHERE id_pedido='2';
 UPDATE Pedido SET estado='pendiente' WHERE id_pedido='3';
 SELECT * FROM producto;
 SELECT * FROM Pedido;
+SELECT * FROM Pedido_producto;
+SELECT *
+FROM Pedido_producto
+INNER JOIN Pedido
+ON Pedido.id_pedido=Pedido_producto.pedido_id_pedido WHERE id_pedido='1';
+
 
 
 select * from Cuenta WHERE usuario='Gerardo' and rol='Vendedor';
