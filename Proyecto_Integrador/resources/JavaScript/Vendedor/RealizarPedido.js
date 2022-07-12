@@ -32,9 +32,7 @@ const datosPrecargados=()=>{
             }
         }
     })    
-    console.log(arbolPedidos);
 }
-console.log(arbolPedidos);
 datosPrecargados();
 
 const calcularPrecioPagar=(producto, accion)=>{

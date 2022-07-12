@@ -66,6 +66,46 @@ const buscarIdProducto=(idPedido, nombrePedido)=>{
     });
 }
 
+const hacerCorte=()=>{
+    let vendido=0;
+    conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+            let long=rows.length;
+            for(let i=0;i<long;i++){
+                if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado==='completado'){
+                  arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
+                }
+            }
+            arbolPedidos.mostrar_PreOrden();
+            for(let i=0;i<arrayDatos.length;i++){
+                vendido+=arrayDatos[i].precio;
+            }
+            let date=new Date();
+            // let fecha=`'${date.getFullYear()}-${date.getMonth()}-${date.getDate()}'`;
+            
+            console.log(vendido);
+            let mes=date.getMonth();
+            let dia=date.getDate();
+            if(mes<10){
+                mes='0'+mes;
+            }
+            if(dia<10){
+                dia='0'+dia;
+            }
+            
+            let fecha=`'${date.getFullYear()}-${mes}-${dia}'`;
+            console.log(fecha);
+            conexion.query(`INSERT INTO Venta VALUES(0,'${vendido}',${fecha})`,(error, rows,fields)=>{
+                if(error){
+                    throw error;
+                }
+            });
+            
+        }
+    });
+}
 
 const agregarLista=()=>{
     //query para que funcione el arbol
@@ -89,6 +129,7 @@ const agregarLista=()=>{
                     </li>
                 `;
                 lista.insertAdjacentHTML("beforeend",elemento);
+                hacerCorte();
             }          
         }
     });

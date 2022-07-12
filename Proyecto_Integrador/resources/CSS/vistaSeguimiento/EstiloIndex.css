@@ -227,6 +227,7 @@
 }
 
 .contenido .liButon {
+    cursor: pointer;    
     align-items: center;
     color: white;
     padding: 10px;
