@@ -1,4 +1,4 @@
-const conexion=require('../../../conectar.js');
+    const conexion=require('../../../conectar.js');
 import {Arbol, arrayDatos} from '../ArbolBinario/arbol.js';
 const lista=document.querySelector('#lista_productos');
 const botonRealizarPedido=document.querySelector('#Hacer_pedido');

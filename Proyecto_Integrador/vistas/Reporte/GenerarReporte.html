@@ -31,7 +31,7 @@
             <li><a href="../../indexReporte.html">Pagina principal</a></li>
         </ul>
         <label for="btn-menu">| | |</label>
-        <a a href="index.html"><input type="button" value="Cerrar Sesion" class="btnCerrarSesion"></a>
+        <a a href="../../index.html"><input type="button" value="Cerrar Sesion" class="btnCerrarSesion"></a>
     </div>
 </div>
 <div class="Contenido">
@@ -41,52 +41,31 @@
     <div class="Subcontenido2">
         <div>
             <span>Productos Consumidos</span>
-            <label id="txtDescripcionB"></label>
+            <label class="lista" id="listaProductos"></label>
         </div>
         <div>
-            <span>Precio</span>
-            <label id="txtPrecioB"></label>
-            <br>
             <span>Cantidad</span>
-            <label id="txtPrecioB"></label>
+            <label class="casilla" id="textCantidsadProducto"></label>
         </div>
     </div>
     <div class="Subcontenido2">
         <div>
             <span>Pedidos Realizados</span>
-            <label id="txtDescripcionB"></label>
+            <label class="lista" id="listaPedidos"></label>
         </div>
         <div>
-            <span>Precio</span>
-            <label id="txtPrecioB"></label>
+            <span>Ganado</span>
+            <label class="casilla" id="txtPrecioG">$00.00</label>
             <br>
             <span>Cantidad</span>
-            <label id="txtPrecioB"></label>
+            <label class="casilla" id="textCantidadPedidos"></label>
         </div>
     </div>
     <div class="Subcontenido3">
-        <div>
-            <span>Empleado</span>
-            <label id="txtDescripcionB"></label>
-            <br>
-                <a class="button" href="javascript:history.back()">Generar PDF
-                </a>
-        </div>
-        <div>
-            <span>Turno</span>
-            <label id="txtPrecioB"></label>
-            <br>
-            <span>Ganancia</span>
-            <label id="txtPrecioB"></label><br>
-        </div>
-        <div>
-            <span>Sueldo</span>
-            <label id="txtPrecioB"></label>
-            <br>
-            <span>Gastos</span>
-            <label id="txtPrecioB"></label><br>
-        </div>
+        <a class="button" href="javascript:history.back()">Generar PDF
+        </a>
     </div>
 </div>
 </body>
+<script src="../../resources/JavaScript/Duenio/mostrarDatos.js" type="module"></script>
 </html>

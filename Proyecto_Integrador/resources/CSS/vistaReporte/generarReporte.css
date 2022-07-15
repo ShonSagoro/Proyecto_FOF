@@ -48,15 +48,18 @@
     color: #1f1f1f;
 }
 
-.Contenido .Subcontenido2 div #txtPrecioB{
+
+.lista{
     display: block;
     text-decoration: none;
     width: 90%;
-    height: 20px;
+    height: 130px;
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
     padding: 10px;
     color: #1f1f1f;
+    overflow: hidden;
+    overflow-y: scroll;  
 }
 
 .Contenido .Subcontenido3{
@@ -69,24 +72,22 @@
     padding: 20px 0px 20px 0px;
 }
 
-.Contenido .Subcontenido3 div #txtDescripcionB{
+#txtDescripcionB{
     display: block;
     text-decoration: none;
     width: 90%;
     height: 20px;
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
-    padding: 10px;
     color: #1f1f1f;
 }
 
-.Contenido .Subcontenido3 div #txtPrecioB{
+.casilla{
     display: block;
     text-decoration: none;
-    width: 77%;
+    width: 90%;
     height: 20px;
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
-    padding: 10px;
     color: #1f1f1f;
 }
