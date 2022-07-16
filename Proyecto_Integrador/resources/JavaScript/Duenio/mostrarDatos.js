@@ -83,6 +83,13 @@ const agregarCantidadPedidos=()=>{
     });
 }
 
+const obtenerfecha=()=>{
+    let date=new Date();    
+    let mes=(date.getMonth()<10)? '0'+date.getMonth(): date.getMonth();
+    let dia=(date.getDate()<10)?'0'+date.getDate(): date.getDate();
+    let fecha=`'${date.getFullYear()}-${mes}-${dia}'`;
+}
+
 
 const main=()=>{
     calcularCantidadProductos();

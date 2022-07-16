@@ -5,7 +5,6 @@ const btnCompletarPedido=document.querySelector('#pedidoCompletado');
 let arbolPedidos=new Arbol();
 
 const cargarPedido=()=>{
-    console.log('entre')
     conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
         if(error){
             throw error;
@@ -18,15 +17,14 @@ const cargarPedido=()=>{
             }
         }
     });
+    //actualizar la lista de pedidos cada 5 minutos
     setInterval(() => {
-        console.log('entre')
         conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
             if(error){
                 throw error;
             }else{
                 let long=rows.length;
                 for(let i=0;i<long;i++){
-                    console.log(rows[i].estado);
                     if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado!=='completado'){
                         arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
                     }

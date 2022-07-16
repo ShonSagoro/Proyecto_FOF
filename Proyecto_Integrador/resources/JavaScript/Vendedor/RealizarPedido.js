@@ -18,7 +18,6 @@ const datosPrecargados=()=>{
             for(let i=0; i<long; i++){
                 arbolPedidos.add(rows[i].nombre, rows[i]);
             }
-            console.log(arbolPedidos);
             arbolPedidos.mostrar_InOrden();
             for(let i=0;i<long;i++){
                 const elemento=` <li id="elemento">
@@ -57,7 +56,6 @@ const calcularPrecioPagar=(producto, accion)=>{
 
 const cantidadProducto=(producto, accion)=>{
     let cantidadActual=parseInt(document.getElementById("text_"+producto).textContent);
-    // console.log("text_"+producto);
     if(accion==='+'){
         cantidadActual+=1;
         calcularPrecioPagar(producto, accion);
@@ -84,7 +82,6 @@ lista.addEventListener('click', (e)=>{
 
 const CargarPedidoCocinero=(idPedido)=>{
     for(let i=0; i<producto.length; i++){ 
-        console.log(producto); 
         let hayPedido=parseInt(document.getElementById("text_"+producto[i]).textContent);
         if(hayPedido!==0){
             let query=`SELECT id_producto FROM Producto WHERE nombre='${producto[i]}'`;
@@ -102,7 +99,6 @@ const CargarPedidoCocinero=(idPedido)=>{
                         if(error){
                             throw error;
                         }else{
-                            console.log('Exito');
                             document.getElementById("text_"+producto[i]).innerHTML='0';
                         }
                     });
@@ -159,7 +155,6 @@ const CargarPedido=()=>{
 }
 
 botonRealizarPedido.addEventListener('click',()=>{
-    // console.log(pagoTotal);
     CargarPedido();
 });
 

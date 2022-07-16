@@ -5,28 +5,27 @@ let arbolPedidos=new Arbol();
 
 //actualizar arbol
 const cargarPedido=()=>{
-    console.log('entre')
     conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
         if(error){
             throw error;
         }else{
             let long=rows.length;
             for(let i=0;i<long;i++){
+                //los pedidos no deben estar completos y deben existir
                 if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado!=='completado'){
                   arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
                 }
             }
         }
     });
+    //actualizar los datos cada 5 minutos
     setInterval(() => {
-        console.log('entre')
         conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
             if(error){
                 throw error;
             }else{
                 let long=rows.length;
                 for(let i=0;i<long;i++){
-                    console.log(rows[i].estado);
                     if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado!=='completado'){
                         arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
                     }
@@ -84,19 +83,9 @@ const hacerCorte=()=>{
             }
             let date=new Date();
             // let fecha=`'${date.getFullYear()}-${date.getMonth()}-${date.getDate()}'`;
-            
-            console.log(vendido);
-            let mes=date.getMonth();
-            let dia=date.getDate();
-            if(mes<10){
-                mes='0'+mes;
-            }
-            if(dia<10){
-                dia='0'+dia;
-            }
-            
+            let mes=(date.getMonth()<10)? '0'+date.getMonth(): date.getMonth();
+            let dia=(date.getDate()<10)?'0'+date.getDate(): date.getDate();
             let fecha=`'${date.getFullYear()}-${mes}-${dia}'`;
-            console.log(fecha);
             conexion.query(`INSERT INTO Venta VALUES(0,'${vendido}',${fecha})`,(error, rows,fields)=>{
                 if(error){
                     throw error;
@@ -129,7 +118,8 @@ const agregarLista=()=>{
                     </li>
                 `;
                 lista.insertAdjacentHTML("beforeend",elemento);
-                hacerCorte();
+
+                //!hacerCorte();
             }          
         }
     });

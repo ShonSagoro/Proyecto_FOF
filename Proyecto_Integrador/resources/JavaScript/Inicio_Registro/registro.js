@@ -2,7 +2,6 @@ const conexion = require('../conectar.js');
 const botonRegistro = document.querySelector('#btnRegistro');
 
 botonRegistro.addEventListener('click', ()=>{
-    console.log("Entre");
     let correo=document.getElementById("txtCorreoR").value;
     let usuario=document.getElementById("txtUserR").value;
     let contrasenia= document.getElementById("txtPassR").value;

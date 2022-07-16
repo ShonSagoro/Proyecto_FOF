@@ -85,7 +85,6 @@ class Arbol{
         if(nodo===null){
             return;
         }
-        // console.log(nodo.dato);
         arrayDatos.push(nodo.dato);
         this.ordenar_PreOrden(nodo.izq);
         this.ordenar_PreOrden(nodo.der);
@@ -101,7 +100,6 @@ class Arbol{
             return;
         }
         this.ordenar_InOrden(nodo.izq);
-        // console.log(nodo.dato);
         arrayDatos.push(nodo.dato);
         this.ordenar_InOrden(nodo.der);
     }
@@ -116,7 +114,6 @@ class Arbol{
         }
         this.ordenar_PostOrden(nodo.izq);
         this.ordenar_PostOrden(nodo.der);
-        // console.log(nodo.dato);
         arrayDatos.push(nodo.dato);
     }
     
@@ -145,10 +142,8 @@ class Arbol{
                 return false;
             }
         }
-        // console.log(actual);
 
         if(actual.izq===null && actual.der===null){
-            console.log("caso 1");
             if(actual===this.raiz){
                 this.raiz=null;
             }
@@ -160,7 +155,6 @@ class Arbol{
         }
 
         else if(actual.izq===null && actual.der!==null){         
-            console.log("caso 2 der");  
             if(actual===this.raiz){
                 this.raiz=actual.der;
             }
@@ -172,7 +166,6 @@ class Arbol{
         }
         
         else if(actual.izq!==null && actual.der===null){
-            console.log("caso 2 der");
             if(actual===this.raiz){
                 this.raiz=actual.izq;
             }
@@ -185,7 +178,6 @@ class Arbol{
         }
 
         else{
-            console.log("caso 3");
             let nodoR=this.getNodoRemplazado(actual);
             if(actual===this.raiz){
                 this.raiz=nodoR;
@@ -203,11 +195,8 @@ class Arbol{
         let nodoRemplazado=nodoEliminado;
         let nodoAnteriorR=nodoEliminado; 
         let actual=nodoEliminado.der; 
-        console.log(nodoEliminado);
-        console.log(nodoEliminado.der);
 
         while(actual!==null){
-            console.log(actual);
             nodoAnteriorR=nodoRemplazado;
             nodoRemplazado=actual;
             actual=actual.izq;

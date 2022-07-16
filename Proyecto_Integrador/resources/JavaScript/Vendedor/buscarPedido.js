@@ -4,7 +4,6 @@ const botonBuscarPedido=document.querySelector('#buscarProducto');
 
 botonBuscarPedido.addEventListener('click',()=>{
     let textoBuscar=document.getElementById('PedidoB').value;
-    // console.log(textoBuscar);
     if(textoBuscar!==''){
         buscarProducto(textoBuscar);
     }else{

@@ -17,23 +17,19 @@ botonRegistrar.addEventListener('click', ()=>{
                 if(error){
                     throw error;
                 }else{
-                    console.log(rows);
                     if(rows.length!==0){
                         document.getElementById("ValidacionProducto").innerHTML="Producto ya existente"
                     }else{
                         let query=`INSERT INTO Producto  VALUES (0,'${nombrePR}','${descripcionPR}','${costoPR}')`;
                         conexion.query(query, function (err) {
                             if (err) {
-                                console.log("error en el query");
-                                console.log(err);
-                                return;
+                                throw err;
                             }else { 
                                 document.getElementById("NombrePR").value='';
                                 document.getElementById("DescripcionPR").value='';
                                 document.getElementById("CostoPR").value='';
                                 Contador_caracteres();
                                 texto="PRODUCTO REGISTRADO";
-                                console.log( "Datos guardados en base de datos");
                             }
                         }); 
                     }

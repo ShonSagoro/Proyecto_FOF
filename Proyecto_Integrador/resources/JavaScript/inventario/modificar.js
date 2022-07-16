@@ -20,7 +20,6 @@ const buscarProducto=producto=>{
         if(error){
             throw error;
         }else{
-            console.log(rows);
             if(rows.length!==0){
                 document.getElementById('txtDescripcionB').innerHTML=rows[0].descripcion;
                 document.getElementById('txtPrecioB').innerHTML="$"+rows[0].costo+".00";
@@ -59,7 +58,6 @@ const buscarProductoReem=producto=>{
                     if(descripcionReem!==rows[3].descripcion || precioReem!==rows[0].costo){
                         conexion.query("UPDATE Producto SET descripcion='"+descripcionReem+"', costo='"+precioReem+"' WHERE id_producto= '"+rows[0].id_producto+"'", (error)=>{
                             if(error){
-                                console.log("algo salio mal");
                                 throw error;
                             }else{
                                 document.getElementById('DescripcionPR').innerHTML='';
@@ -100,7 +98,6 @@ const buscarProductoELiminar=producto=>{
             if(rows.length!==0){
                 conexion.query("DELETE FROM Producto WHERE id_producto= '"+rows[0].id_producto+"'", (error)=>{
                     if(error){
-                        console.log("algo salio mal");
                         throw error;
                     }
                     else{

@@ -58,7 +58,6 @@ const calcularPrecioPagar=(producto, accion)=>{
 
 const cantidadProducto=(producto, accion)=>{
     let cantidadActual=parseInt(document.getElementById("text_"+producto).textContent);
-    // console.log("text_"+producto);
     if(accion==='+'){
         cantidadActual+=1;
         calcularPrecioPagar(producto, accion);
@@ -102,7 +101,6 @@ const BuscarDatos=(idPedido, precioPedido)=>{
 }
 
 const vaciarPedido=()=>{
-    console.log('Entre vaciar');
     conexion.query(`SELECT * FROM Producto`, (error, rows, fields)=>{
         if(error){
             throw error;
@@ -134,92 +132,92 @@ btnBuscar.addEventListener('click',()=>{
         document.getElementById('txtVerificar').innerHTML="INGRESE EL NOMBRE DEL PEDIDO";
     }
 });
+ //el pedido original no tenia dicho producto, por ende hay que agregarlo a Pedido_producto
+const agregarProductoPedido=(productoTemp, idPedido)=>{
+    conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+            let cantidad=parseInt(document.getElementById("text_"+producto[i]).textContent);
+            let query=`INSERT INTO Pedido_Producto VALUES('${rows[0].id_producto}','${idPedido}','${cantidad}')`;
+            conexion.query(query, (error, rows, fields)=>{
+                if(error){
+                    throw error;
+                }else{
+                    document.getElementById("text_"+producto[i]).textContent=0;
+                }
+            });
+        }
+    });
+
+}
+
+const actualizarPedido=(productoTemp, idProducto, idPedido)=>{
+    let query=`UPDATE Pedido_producto SET cantidad_producto=
+    '${parseInt(document.getElementById("text_"+productoTemp).textContent)}' WHERE pedido_id_pedido='${idPedido}' && producto_id_producto='${idProducto}'`;
+    conexion.query(query,(error, rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+            document.getElementById("text_"+producto[i]).textContent=0;
+        }
+    }); 
+}
+
+const agregarProducto=(productoTemp, idPedido)=>{
+    //sacamos el id del producto
+    conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+            let idProducto=rows[0].id_producto;
+            let query=`SELECT * FROM Pedido_producto WHERE pedido_id_pedido='${idPedido}' && producto_id_producto=${idProducto}`;
+            conexion.query(query,(error,rows,fields)=>{
+                if(error){
+                    throw error;
+                }else if(rows.length!==0){
+                    actualizarPedido(productoTemp, idProducto, idPedido);
+                }else{
+                    agregarProductoPedido(productoTemp)
+                }
+            });
+        }
+    });
+}
 
 const actualizarDatos=(idPedido)=>{
     for(let i=0; i<producto.length; i++){ 
         let hayPedido=parseInt(document.getElementById("text_"+producto[i]).textContent);
         let productoTemp=producto[i];
         if(hayPedido!==0){
-            conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
-                if(error){
-                    throw error;
-                }else{
-                    let idProducto=rows[0].id_producto;
-                    let query=`SELECT * FROM Pedido_producto WHERE pedido_id_pedido='${idPedido}' && producto_id_producto=${idProducto}`;
-                    conexion.query(query,(error,rows,fields)=>{
-                        if(error){
-                            throw error;
-                        }else if(rows.length!==0){
-                            
-                            let query=`UPDATE Pedido_producto SET cantidad_producto='${parseInt(document.getElementById("text_"+productoTemp).textContent)}' WHERE pedido_id_pedido='${idPedido}' && producto_id_producto='${idProducto}'`;
-                            conexion.query(query,(error, rows, fields)=>{
-                                if(error){
-                                    throw error;
-                                }else{
-                                    console.log('EXITO 1');
-                                    console.log("ENTRE: "+parseInt(document.getElementById("text_"+productoTemp).textContent));
-                                    console.log("SOY: "+productoTemp);
-                                    document.getElementById("text_"+producto[i]).textContent=0;
-                                }
-                            }); 
-                        }else{
-                            conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
-                                if(error){
-                                    throw error;
-                                }else{
-                                    let query=`INSERT INTO Pedido_Producto VALUES('${rows[0].id_producto}','${idPedido}','${hayPedido}')`;
-                                    conexion.query(query, (error, rows, fields)=>{
-                                        if(error){
-                                            throw error;
-                                        }else{
-                                            console.log("Alabama");
-                                            document.getElementById("text_"+producto[i]).textContent=0;
-                                        }
-                                    });
-                                }
-                            });
-                            
-        
-                        }
-                    });
-                }
-            });
- 
-
+            agregarProducto(productoTemp,idPedido);
         }else{
+            //en caso de estar eliminado algun pedido, hara lo siguiente
             conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
                 if(error){
                     throw error;
                 }else{
                     let idProducto=rows[0].id_producto;
-                    let query=`SELECT * FROM Pedido_producto WHERE pedido_id_pedido='${idPedido}' && producto_id_producto=${idProducto}`;
-                    conexion.query(query,(error,rows,fields)=>{
+                    let query=`DELETE FROM Pedido_producto WHERE pedido_id_pedido='${idPedido}' && producto_id_producto='${idProducto}'`;
+                    conexion.query(query,(error, rows, fields)=>{
                         if(error){
                             throw error;
-                        }else if(rows.length!==0){
-                            let query=`UPDATE Pedido_producto SET cantidad_producto='${parseInt(document.getElementById("text_"+productoTemp).textContent)}' WHERE pedido_id_pedido='${idPedido}' && producto_id_producto='${idProducto}'`;
-                            conexion.query(query,(error, rows, fields)=>{
-                                if(error){
-                                    throw error;
-                                }else{
-                                    console.log('EXITO 1');
-                                    console.log("ENTRE: "+0);
-                                    console.log("SOY: "+productoTemp);
-                                    document.getElementById("text_"+producto[i]).textContent=0;
-                                }
-                            }); 
+                        }else{
+                            document.getElementById("text_"+producto[i]).textContent=0;
                         }
-                    });
+                    }); 
+            
                 }  
             });
         }   
     }
 }
+
+
 btnModificar.addEventListener('click',()=>{
-    document.getElementById('txtVerificar').value='';
+    document.getElementById('txtVerificar').innerHTML='';
     let nombreM=document.getElementById('BuscarTxt').value;
     if(nombreM!==''){
-        console.log(pagoTotal);
         conexion.query(`SELECT * FROM Pedido WHERE nombre_pedido='${nombreM}'`,(error, rows, fields)=>{
             if(error){
                 throw error;
@@ -229,11 +227,8 @@ btnModificar.addEventListener('click',()=>{
                         if(error){
                             throw error;
                         }else{
-                        console.log('Actualizado');
                         }
                     });
-                    console.log("MAMAHUEVO SOY:" +nombreM);
-                    console.log("MAMAHUEVO SOY:"+ rows[0].id_pedido);
                     actualizarDatos(rows[0].id_pedido); 
                 }else{
                     document.getElementById('txtVerificar').innerHTML="EL PEDIDO ESTA SIENDO PROCESADO";
@@ -242,6 +237,7 @@ btnModificar.addEventListener('click',()=>{
         });
         document.getElementById('BuscarTxt').value='';
         document.getElementById('precioPedidoB').textContent='00.00';
+        vaciarPedido();
         setTimeout(() => {
             window.location.assign("modificar.html"); 
         }, 5000);

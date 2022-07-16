@@ -1,19 +1,7 @@
 const conexion=require('../../../conectar.js');
 import {Arbol, arrayDatos} from '../ArbolBinario/arbol.js';
-// class Producto{
-//     constructor(id,nombre, descripcion, costo){
-//         this.id=id;
-//         this.nombre=nombre;
-//         this.descripcion=descripcion;
-//         this.costo=costo
-//     }
-//     infoProducto(){
-//         return "[Nombre: "+this.nombre+"; Descripcion: "+this.descripcion+"; Costo: $"+this.costo+"]";
-//     }
-// }
 const botonBuscar=document.querySelector('#buscarProducto');
 let arbolProducto= new Arbol();
-const lista=document.getElementById('lista_productos');
 const contenedorProductos=document.getElementById('Section_Producto');
 
 
@@ -29,7 +17,6 @@ const mostrarListaProductos=()=>{
                 arbolProducto.add(rows[i].nombre, rows[i]);
             }
             arbolProducto.mostrar_InOrden();
-            console.log(arrayDatos);
             for(let i=0; i<long; i++){
                 const productoR=document.createElement('div');
                 productoR.textContent=arrayDatos[i].nombre;
@@ -47,7 +34,6 @@ botonBuscar.addEventListener('click',()=>{
         buscarProducto(nombreBuscar);
     }else{
         vaciarDatos();
-        console.log("estoy vacio, soy el Hollow Knight");
     }
 });
 
@@ -72,10 +58,9 @@ const vaciarDatos=()=>{
     document.getElementById('txtPrecioB').innerHTML='';
 }
 
-
+//cargar lista
 mostrarListaProductos();
 
 contenedorProductos.addEventListener('click', (e)=>{
-    console.log(e.target);
     buscarProducto(e.target.textContent);
 });
