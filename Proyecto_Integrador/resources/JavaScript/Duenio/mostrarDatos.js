@@ -15,7 +15,7 @@ const agregarDatosArbolPedidos=()=>{
             throw error;
         }else{
             for(let i=0;i<rows.length;i++){
-                if(rows[i].estado==='completado'){
+                if(rows[i].estado==='completado' || rows[i].estado==='Completado'){
                     arbolPedidos.add(rows[i].nombre_pedido, rows[i]);
                 }
             }
@@ -65,8 +65,6 @@ const agregarDatosArbolProductos=(producto)=>{
     
 }
 
-
-
 const agregarDatosProductoArray=()=>{
     let producto=[];
     let query=`SELECT * FROM Producto`;
@@ -80,11 +78,6 @@ const agregarDatosProductoArray=()=>{
             agregarDatosArbolProductos(producto);
         }
     });
-
-    
-
-
-    
 }
 
 const calcularCantidadProductos=()=>{
@@ -113,6 +106,7 @@ const agregarCantidadPedidos=()=>{
                 cantidadPaga+=parseInt(rows[i].precio);
             }
             document.getElementById('txtPrecioG').innerHTML=`$${cantidadPaga}.00`;
+            document.getElementById('txtGanancia').innerHTML=`$${cantidadPaga}.00`;
             cantidadPaga=0;
         }
     });
@@ -120,17 +114,30 @@ const agregarCantidadPedidos=()=>{
 
 const obtenerfecha=()=>{
     let date=new Date();    
-    let mes=(date.getMonth()<10)? '0'+date.getMonth(): date.getMonth();
-    let dia=(date.getDate()<10)?'0'+date.getDate(): date.getDate();
-    let fecha=`'${date.getFullYear()}-${mes}-${dia}'`;
+    let mes=date.getMonth();
+    let dia=date.getDate();
+    let year = date.getFullYear();
+    // let fecha=`'${date.getFullYear()}-${mes}-${dia}'`;
+    document.getElementById('current_date').innerHTML=(dia + " de " + nombrarMeses[mes] + " del " + year);
 }
 
+const nombrarMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
+const mostrarPerfil=()=>{
+    let usuario = localStorage.getItem('usuario').replace(/"/g, "");    //Quitar comillas para dejar solo el nombre del usuario
+    document.getElementById('usuario').innerHTML=usuario;
+
+}
 
 const main=()=>{
     calcularCantidadProductos();
     agregarCantidadPedidos(); 
     agregarDatosProductoArray();
     agregarDatosArbolPedidos();
+    obtenerfecha();
+    mostrarPerfil();
 }
 
 main();

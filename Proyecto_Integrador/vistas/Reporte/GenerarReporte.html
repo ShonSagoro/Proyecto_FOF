@@ -31,6 +31,7 @@
             <li><a href="../../indexReporte.html">Pagina principal</a></li>
         </ul>
         <label for="btn-menu">| | |</label>
+        <br>
         <a a href="../../index.html"><input type="button" value="Cerrar Sesion" class="btnCerrarSesion"></a>
     </div>
 </div>
@@ -58,13 +59,17 @@
             <label class="casilla" id="txtPrecioG">$00.00</label>
             <br>
             <span>Cantidad</span>
-            <label class="casilla" id="textCantidadPedidos"></label>
+            <label class="casilla" id="textCantidadPedidos"></label>   
+            <br>
+            <span>Dueño</span>
+            <label class="preInfo" id="usuario"></label><br><!-- -->
+            
         </div>
     </div>
     <div class="Subcontenido3">
-        <a class="button" href="javascript:history.back()">Generar PDF
-        </a>
-    </div>
+        <a class="generarPDF" href="generarPDF.html"><input class="generarPDF" type="button" value="GENERAR PDF"></a>
+    </div><br>
+    <label class="subtitulo" id="current_date"></label>
 </div>
 </body>
 <script src="../../resources/JavaScript/Duenio/mostrarDatos.js" type="module"></script>

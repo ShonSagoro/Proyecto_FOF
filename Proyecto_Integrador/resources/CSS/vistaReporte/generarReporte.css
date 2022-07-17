@@ -6,6 +6,8 @@
     box-sizing: border-box;
     padding: 30px 30px;
     width: 130vh;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 
 .Contenido .Subcontenido1 h4{
@@ -14,7 +16,7 @@
     height: 30px;   
     width: 95vh;
     color: rgb(56, 40, 12);
-    font-size: 30px;
+    font-size: 40px;
     padding: 10px;
     position: absolute;
     left: 15%;
@@ -34,7 +36,7 @@
 
 .Contenido .Subcontenido2 span{
     padding: 20px 0px 20px 0px;
-    
+    font-weight: bold;
 }
 
 .Contenido .Subcontenido2 div #txtDescripcionB{
@@ -53,13 +55,14 @@
     display: block;
     text-decoration: none;
     width: 90%;
-    height: 130px;
+    height: 140px;
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
     padding: 10px;
     color: #1f1f1f;
     overflow: hidden;
     overflow-y: scroll;  
+    border-radius: 2px;    /* RADIO DEL RECTANGULO */
 }
 
 .Contenido .Subcontenido3{
@@ -80,9 +83,33 @@
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
     color: #1f1f1f;
+    border-radius: 10px;
 }
 
 .casilla{
+    display: block;
+    text-decoration: none;
+    width: 90%;
+    height: 25px;
+    border: 1px solid rgb(34, 26, 3);
+    list-style: none;
+    color: #1f1f1f;
+    border-radius: 2px;    /* RADIO DEL RECTANGULO */
+}
+
+.generarPDF{
+    color:white;
+    background-color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.subtitulo{
+    float: left;
+    right:20%;
+}
+
+.preInfo{
     display: block;
     text-decoration: none;
     width: 90%;
