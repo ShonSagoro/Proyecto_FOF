@@ -30,26 +30,61 @@ const agregarDatosArbolPedidos=()=>{
     });
 }
 
-const agregarDatosArbolProductos=()=>{
-    let query=`SELECT *
-    FROM Pedido_producto
-    INNER JOIN producto
-    ON Pedido_producto.producto_id_producto=producto.id_producto`;
+const agregarDatosArbolProductos=(producto)=>{
+    for(let i=0;i<producto.length;i++){
+        let cantidad=0;
+        let query=`SELECT *
+        FROM Pedido_producto
+        INNER JOIN producto
+        ON Pedido_producto.producto_id_producto=producto.id_producto WHERE nombre='${producto[i]}'`;
+        conexion.query(query,(error, rows, fields)=>{
+            if(error){
+                throw error;
+            }else{
+                for(let i=0;i<rows.length;i++){
+                    cantidad+=parseInt(rows[i].cantidad_producto);
+                }
+                let productoArbol={nombre:producto[i], cantidad: cantidad}
+                arbolProductos.add(producto[i], productoArbol);
+            }
+        });
+    }
+    conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+            arbolProductos.mostrar_InOrden();
+            console.log(arrayDatos);
+            for(let i=0;i<arrayDatos.length;i++){
+                const productoR=document.createElement('div');
+                productoR.textContent=`Producto: ${arrayDatos[i].nombre}|| Cantidad: ${arrayDatos[i].cantidad}`;
+                listaProducto.append(productoR);
+            }
+        }
+    });
+    
+}
+
+
+
+const agregarDatosProductoArray=()=>{
+    let producto=[];
+    let query=`SELECT * FROM Producto`;
     conexion.query(query,(error, rows, fields)=>{
         if(error){
             throw error;
         }else{
             for(let i=0;i<rows.length;i++){
-                arbolProductos.add(rows[i].nombre, rows[i]);
+                producto.push(rows[i].nombre);
             }
-            arbolProductos.mostrar_InOrden();
-            for(let i=0;i<rows.length;i++){
-                const productoR=document.createElement('div');
-                productoR.textContent=`Producto: ${arrayDatos[i].nombre}|| Cantidad: ${arrayDatos[i].cantidad_producto}`;
-                listaProducto.append(productoR);
-            }
+            agregarDatosArbolProductos(producto);
         }
     });
+
+    
+
+
+    
 }
 
 const calcularCantidadProductos=()=>{
@@ -94,7 +129,7 @@ const obtenerfecha=()=>{
 const main=()=>{
     calcularCantidadProductos();
     agregarCantidadPedidos(); 
-    agregarDatosArbolProductos();   
+    agregarDatosProductoArray();
     agregarDatosArbolPedidos();
 }
 
