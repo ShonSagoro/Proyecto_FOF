@@ -6,6 +6,7 @@
 
 .registro{
     position: absolute;
+    width: 125vh;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -28,7 +29,7 @@
     background: transparent;
     outline: none;
     height: 40px;   
-    width: 125vh;
+    width: 100%;
     color: rgb(56, 40, 12);
     font-size: 20px;
     counter-increment: none;
@@ -46,7 +47,7 @@
     background: transparent;
     outline: none;
     font-size: 20px;
-    width: 125vh;
+    width: 100%;
 }
 
 .registro label{

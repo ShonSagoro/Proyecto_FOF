@@ -69,9 +69,8 @@ body{
 /* menu lateral */
 #btn-menu{
     display: none;
-    position: absolute;
 }
-.container-menu{
+/* .container-menu{
     position: absolute;
     background: rgba(0,0,0,0.5);
     width: 100%;
@@ -83,10 +82,12 @@ body{
     visibility: hidden;
 }
 
+
+
 #btn-menu:checked ~ .container-menu{
     opacity: 1;
     visibility: visible;
-}
+} */
 
 
 .cont-menu{
@@ -109,7 +110,6 @@ body{
 
 #btn-menu:checked ~ .container-menu .cont-menu{
     transform: translateX(0%);
-    
 } 
 
 .cont-menu .bloque{
@@ -118,11 +118,11 @@ body{
     position: fixed;
     top:0;
     left: 0;
-    background-color: #2e4f73;
+    background-color: #1f3955;
 }
 
 .cont-menu ul{
-    transform: translateY(47%);
+    transform: translateY(100%);
 }
 
 .cont-menu ul a{

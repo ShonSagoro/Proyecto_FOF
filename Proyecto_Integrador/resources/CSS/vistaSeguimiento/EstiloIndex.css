@@ -99,6 +99,12 @@
     text-align: center;
     font-size: 22px;
 }
+.Contenido p{
+    font-size: 15px;
+    color: rgb(32, 58, 98);
+    
+}
+
 
 .Contenido #txtLocalizacion{
     display: block;
@@ -108,6 +114,8 @@
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
     color: #1f1f1f;
+    padding-top: 5%;
+    text-align: center;
 }
 
 .Contenido #txtLocalizacionV{
@@ -118,6 +126,9 @@
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
     color: #1f1f1f;
+    font-size: 14px;
+    padding-top: 5%;
+    text-align: center;
 }
 
 .Contenido #txtEstado{
@@ -128,6 +139,7 @@
     border: 1px solid rgb(34, 26, 3);
     list-style: none;
     color: #1f1f1f;
+    text-align: center;
 }
 
 .Contenido a button{
@@ -136,14 +148,14 @@
     height: 25px;
     border: none;
     outline: none;
-    background: #224aec;
+    background:darkorange;
     color: #fff;
     font-size: 14px;
 }
 
 .Contenido a button:hover{
     cursor: pointer;
-    background: #041568;
+    background:#d96028;
     color: rgb(251, 222, 222);
 }
 
@@ -158,7 +170,9 @@
     height: 30px;
     border: none;
     text-decoration: none;
-    background: #CCD0DE
+    background: #CCD0DE;
+    padding-left: 10px;
+    
 }
 
 
@@ -175,14 +189,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 100px 30px;
 }
 
 .contenido .Subcontenido1{
     width: 100%;
     height: 55vh;
-    padding: 20px;
-    background-color: #1f1f1f;
+    padding: 15px;
+    background-color:gainsboro;
     border: 1px solid rgb(34, 26, 3);
     overflow: hidden;
     overflow-y: scroll;         
@@ -199,7 +213,7 @@
     height: 25px;
     border: none;
     outline: none;
-    background: #224aec;
+    background:darkorange;
     color: #fff;
     font-size: 14px;
 }
@@ -218,21 +232,21 @@
     padding: 20px;
     color: white;
     margin: 5px 0;
-    background-color: #d9a728;
+    background-color:goldenrod;
     border-radius: 20px;
 }
 
 .contenido li:hover {
-    background: #d96028;
+    background:darkorange;
 }
 
 .contenido .liButon {
     cursor: pointer;    
     align-items: center;
-    color: white;
+    color:#1f1f1f;
     padding: 10px;
     border: none;
-    background-color: #d97e28 ;
+    background-color:bisque;
     border-radius: 20px;
 }
 
@@ -242,6 +256,7 @@
     border: none;
     cursor: pointer;
     color: #1f1f1f;
+    padding-left: 10px;
     /* text-decoration: none; */
     background: #CCD0DE;
 }

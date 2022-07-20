@@ -64,7 +64,7 @@
      width: 100%;
      margin-bottom: 20px;
  }
- .BoxIR input[type="text"], .BoxIR input[type="password"], .BoxIR input[type="email"], .BoxIR select{
+ .BoxIR input[type="text"], .BoxIR input[type="password"], .BoxIR input[type="email"]{
     border: none;
     border-bottom: 1px solid #fff;
     background: transparent;
@@ -73,10 +73,22 @@
     color: #fff;
     font-size: 16px;
   }
-  .select select{
-    background: rgba(5,7,12,0.05); 
+.BoxIR select option{
+  background: rgb(30, 1, 1);
+  
+}
+
+  .BoxIR select{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: rgba(5,7,12,0.05); 
+    outline: none;
+    height: 40px;
     width: 100%;
+    color: #fff;
+    font-size: 16px;
   }
+
   
   .BoxIR input[type="submit"] {
     border: none;

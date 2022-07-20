@@ -8,7 +8,8 @@ let pagoTotal=0;
 let producto=[];
 
 let arbolPedidos=new Arbol();
-
+btnEliminar.disable=true;
+btnModificar.disable=true;
 
 const datosPrecargados=()=>{
     conexion.query(`SELECT * FROM Producto`, (error, rows, fields)=>{
@@ -125,26 +126,31 @@ btnBuscar.addEventListener('click',()=>{
                     BuscarDatos(rows[0].id_pedido, rows[0].precio);
                 }else{
                     document.getElementById('txtVerificar').innerHTML="NO EXISTE";
+                    setTimeout(() => {
+                        document.getElementById('txtVerificar').innerHTML=''; 
+                    }, 2000);
                 }
             }
         });
     }else{
         document.getElementById('txtVerificar').innerHTML="INGRESE EL NOMBRE DEL PEDIDO";
+        setTimeout(() => {
+            document.getElementById('txtVerificar').innerHTML=''; 
+        }, 2000);
     }
 });
  //el pedido original no tenia dicho producto, por ende hay que agregarlo a Pedido_producto
-const agregarProductoPedido=(productoTemp, idPedido)=>{
+const agregarProductoPedido=(productoTemp, idPedido, cantidadPedido)=>{
     conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
         if(error){
             throw error;
         }else{
-            let cantidad=parseInt(document.getElementById("text_"+producto[i]).textContent);
-            let query=`INSERT INTO Pedido_Producto VALUES('${rows[0].id_producto}','${idPedido}','${cantidad}')`;
+            let query=`INSERT INTO Pedido_Producto VALUES('${rows[0].id_producto}','${idPedido}','${cantidadPedido}')`;
             conexion.query(query, (error, rows, fields)=>{
                 if(error){
                     throw error;
                 }else{
-                    document.getElementById("text_"+producto[i]).textContent=0;
+                    document.getElementById("text_"+productoTemp).textContent=0;
                 }
             });
         }
@@ -152,19 +158,19 @@ const agregarProductoPedido=(productoTemp, idPedido)=>{
 
 }
 
-const actualizarPedido=(productoTemp, idProducto, idPedido)=>{
+const actualizarPedido=(productoTemp, idProducto, idPedido, cantidadPedido)=>{
     let query=`UPDATE Pedido_producto SET cantidad_producto=
-    '${parseInt(document.getElementById("text_"+productoTemp).textContent)}' WHERE pedido_id_pedido='${idPedido}' && producto_id_producto='${idProducto}'`;
+    '${cantidadPedido}' WHERE pedido_id_pedido='${idPedido}' && producto_id_producto='${idProducto}'`;
     conexion.query(query,(error, rows, fields)=>{
         if(error){
             throw error;
         }else{
-            document.getElementById("text_"+producto[i]).textContent=0;
+            document.getElementById("text_"+productoTemp).textContent=0;
         }
     }); 
 }
 
-const agregarProducto=(productoTemp, idPedido)=>{
+const agregarProducto=(productoTemp, idPedido, cantidadPedido)=>{
     //sacamos el id del producto
     conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
         if(error){
@@ -176,9 +182,11 @@ const agregarProducto=(productoTemp, idPedido)=>{
                 if(error){
                     throw error;
                 }else if(rows.length!==0){
-                    actualizarPedido(productoTemp, idProducto, idPedido);
+                    console.log("ENTRE A ACTUALIZAR PEDIDO, CANTIDAD: "+cantidadPedido);
+                    actualizarPedido(productoTemp, idProducto, idPedido, cantidadPedido);
                 }else{
-                    agregarProductoPedido(productoTemp)
+                    console.log("ENTRE A AGREGAR, CANTIDAD: "+cantidadPedido);
+                    agregarProductoPedido(productoTemp, idPedido, cantidadPedido);
                 }
             });
         }
@@ -187,11 +195,13 @@ const agregarProducto=(productoTemp, idPedido)=>{
 
 const actualizarDatos=(idPedido)=>{
     for(let i=0; i<producto.length; i++){ 
-        let hayPedido=parseInt(document.getElementById("text_"+producto[i]).textContent);
+        let cantidadPedido=parseInt(document.getElementById("text_"+producto[i]).textContent);
         let productoTemp=producto[i];
-        if(hayPedido!==0){
-            agregarProducto(productoTemp,idPedido);
+        if(cantidadPedido!==0){
+            console.log(producto[i]+" ME VAN A ACTUALIZAR")
+            agregarProducto(productoTemp,idPedido, cantidadPedido);
         }else{
+            console.log(producto[i]+" ME VAN A BORRAR")
             //en caso de estar eliminado algun pedido, hara lo siguiente
             conexion.query(`SELECT * FROM Producto WHERE nombre='${productoTemp}'`, (error, rows, fields)=>{
                 if(error){
@@ -217,31 +227,47 @@ const actualizarDatos=(idPedido)=>{
 btnModificar.addEventListener('click',()=>{
     document.getElementById('txtVerificar').innerHTML='';
     let nombreM=document.getElementById('BuscarTxt').value;
-    if(nombreM!==''){
-        conexion.query(`SELECT * FROM Pedido WHERE nombre_pedido='${nombreM}'`,(error, rows, fields)=>{
-            if(error){
-                throw error;
-            }else{
-                if(rows[0].estado==='pendiente'){
-                    conexion.query(`UPDATE Pedido SET precio='${pagoTotal}' WHERE nombre_pedido='${rows[0].nombre_pedido}'`,(error,rows,fields)=>{
-                        if(error){
-                            throw error;
-                        }else{
-                        }
-                    });
-                    actualizarDatos(rows[0].id_pedido); 
+    let cantidad=0;
+    conexion.query(`SELECT * FROM Pedido`, (error, rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+        for(let i=0; i<producto.length;i++){
+            cantidad+=parseInt(document.getElementById("text_"+producto[i]).textContent);
+            console.log(cantidad);
+        }        
+        if(nombreM!==''&& cantidad!=0){
+            conexion.query(`SELECT * FROM Pedido WHERE nombre_pedido='${nombreM}'`,(error, rows, fields)=>{
+                if(error){
+                    throw error;
                 }else{
-                    document.getElementById('txtVerificar').innerHTML="EL PEDIDO ESTA SIENDO PROCESADO";
+                    if(rows[0].estado==='pendiente'){
+                        conexion.query(`UPDATE Pedido SET precio='${pagoTotal}' WHERE nombre_pedido='${rows[0].nombre_pedido}'`,(error,rows,fields)=>{
+                            if(error){
+                                throw error;
+                            }else{
+                            }
+                        });
+                        actualizarDatos(rows[0].id_pedido); 
+                    }else{
+                        document.getElementById('txtVerificar').innerHTML="EL PEDIDO ESTA SIENDO PROCESADO";
+                        setTimeout(() => {
+                            document.getElementById('txtVerificar').innerHTML=''; 
+                        }, 2000);
+                    }
                 }
-            }
-        });
-        document.getElementById('BuscarTxt').value='';
-        document.getElementById('precioPedidoB').textContent='00.00';
-        vaciarPedido();
-        setTimeout(() => {
-            window.location.assign("modificar.html"); 
-        }, 5000);
-    }
+            });
+            document.getElementById('BuscarTxt').value='';
+            document.getElementById('precioPedidoB').textContent='00.00';
+            vaciarPedido();
+        }else{
+            document.getElementById('txtVerificar').innerHTML="Error";
+            setTimeout(() => {
+                document.getElementById('txtVerificar').innerHTML=''; 
+            }, 2000);
+        }
+        }
+    });
 });
 
 btnEliminar.addEventListener('click',()=>{
@@ -251,16 +277,22 @@ btnEliminar.addEventListener('click',()=>{
             if(error){
                 throw error;
             }else{
-                document.getElementById('txtVerificar').innerHTML="PEDIDO ELIMINADO";
                 for(let i=0; i<producto.length; i++){ 
                     document.getElementById("text_"+producto[i]).textContent='0';
-                    document.getElementById('BuscarTxt').value='ELIMINADO';
                 }
+                document.getElementById('txtVerificar').innerHTML="PEDIDO ELIMINADO";
+                document.getElementById('BuscarTxt').value='ELIMINADO';
+                setTimeout(() => {
+                    document.getElementById('txtVerificar').innerHTML=''; 
+                    document.getElementById('BuscarTxt').value='';
+                }, 2000);
             }
     
         });
-        setTimeout(() => {
-            window.location.assign("modificar.html"); 
-        }, 5000);
-    } 
+    }else{
+        document.getElementById('txtVerificar').innerHTML="Error";
+            setTimeout(() => {
+                document.getElementById('txtVerificar').innerHTML=''; 
+            }, 2000);
+    }
 });
