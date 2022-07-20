@@ -134,10 +134,11 @@ const mostrarPerfil=()=>{
 const main=()=>{
     calcularCantidadProductos();
     agregarCantidadPedidos(); 
-    agregarDatosProductoArray();
     agregarDatosArbolPedidos();
     obtenerfecha();
     mostrarPerfil();
+    agregarDatosProductoArray();
+    
 }
 
 main();

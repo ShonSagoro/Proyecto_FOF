@@ -9,7 +9,7 @@ botonRegistro.addEventListener('click', ()=>{
     let rol=document.getElementById('rol').value;
     if(correo!='' && usuario!='' && contrasenia!=''){
         if(contrasenia==contraseniaR){
-            let query="INSERT INTO Cuenta VALUES ("+0+",'"+usuario+"','"+correo+"','"+contrasenia+"','"+rol+"');";
+            let query="INSERT INTO Cuenta VALUES ("+0+",'"+usuario+"','"+correo+"','"+contrasenia+"','"+rol+"',null);";
             conexion.query(query, (error, results, fields)=>{
                 if(error){
                     document.getElementById("validacionRegistro").innerHTML="MAL";

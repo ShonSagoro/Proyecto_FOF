@@ -282,6 +282,7 @@ btnEliminar.addEventListener('click',()=>{
                 }
                 document.getElementById('txtVerificar').innerHTML="PEDIDO ELIMINADO";
                 document.getElementById('BuscarTxt').value='ELIMINADO';
+                vaciarPedido();
                 setTimeout(() => {
                     document.getElementById('txtVerificar').innerHTML=''; 
                     document.getElementById('BuscarTxt').value='';

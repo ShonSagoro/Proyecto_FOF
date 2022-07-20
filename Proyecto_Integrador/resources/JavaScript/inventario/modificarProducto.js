@@ -60,13 +60,13 @@ const buscarProductoReem=producto=>{
                 let descripcionReem=document.getElementById('DescripcionPR').value;
                 let precioReem=document.getElementById('txtPrecioNuevo').value;
                 if(descripcionReem!='' && precioReem!=''){
-                    if(descripcionReem!==rows[3].descripcion || precioReem!==rows[0].costo){
+                    if(descripcionReem!==rows[0].descripcion || precioReem!==rows[0].costo){
                         conexion.query("UPDATE Producto SET descripcion='"+descripcionReem+"', costo='"+precioReem+"' WHERE id_producto= '"+rows[0].id_producto+"'", (error)=>{
                             if(error){
                                 throw error;
                             }else{
-                                document.getElementById('DescripcionPR').innerHTML='';
-                                document.getElementById('txtPrecioNuevo').innerHTML='';
+                                document.getElementById('DescripcionPR').value='';
+                                document.getElementById('txtPrecioNuevo').value='';
                                 document.getElementById('txtDescripcionB').innerHTML=descripcionReem;
                                 document.getElementById('txtPrecioB').innerHTML="$"+precioReem+".00";
                             }
@@ -88,6 +88,8 @@ const buscarProductoReem=producto=>{
 botonEliminar.addEventListener('click',()=>{
     let nombreBuscarEl=document.getElementById('BuscarTxt').value;
     if(nombreBuscarEl!=''){
+        document.getElementById('DescripcionPR').value  ='';
+        document.getElementById('txtPrecioNuevo').value=''
         buscarProductoELiminar(nombreBuscarEl);
     }else{
         document.getElementById('verificarAccion').innerHTML="Busque el producto primero";
@@ -96,6 +98,8 @@ botonEliminar.addEventListener('click',()=>{
 });
 
 const buscarProductoELiminar=producto=>{
+    document.getElementById('DescripcionPR').value='';
+    document.getElementById('txtPrecioNuevo').value='';
     conexion.query("SELECT * FROM Producto WHERE nombre='"+producto+"'", (error, rows, fields)=>{
         if(error){
             throw error;
