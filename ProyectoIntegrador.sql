@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS Producto(
     costo int,
 	PRIMARY KEY (id_producto)  
 ) ENGINE = INNODB;
+DROP TABLE Cuenta;
 CREATE TABLE IF NOT EXISTS Cuenta(
     id_cuenta INT NOT NULL auto_increment,
     usuario VARCHAR(50) NOT NULL,
@@ -33,8 +34,8 @@ CREATE TABLE IF NOT EXISTS Pedido(
 
 CREATE TABLE IF NOT EXISTS Venta(
     id_venta  INT NOT NULL auto_increment,
-    cantidad_precio INT NOT NULL,
-    fecha DATE NOT NULL,
+    ganancia INT NOT NULL,
+    fecha DATE NOT NULL unique,
 	PRIMARY KEY (id_venta)
 ) ENGINE = INNODB;
 
@@ -84,30 +85,39 @@ INSERT INTO Pedido VALUES(0, 'Roque', '40', 'Preparandose', 'Col. Benito Juarez,
 INSERT INTO Pedido VALUES(0, 'Aylin', '10', 'Pendiente', 'Col. Benito Juarez, 147');
 
 INSERT INTO Cuenta VALUES(0, 'admin', 'Shon@gmail.com', 'root', 'Encargado',null);
-INSERT INTO Cuenta VALUES(0, 'Kristell', 'Kristell@gmail.com', '	', 'Cocinero','AV. INDEPENDENCIA NO. 1282-A');
+INSERT INTO Cuenta VALUES(0, 'Kristell', 'Kristell@gmail.com', '22709', 'Cocinero','AV. INDEPENDENCIA NO. 1282-A');
 INSERT INTO Cuenta VALUES(0, 'Juan', 'Juan@gmail.com', '52300', 'Dueño',null);
 INSERT INTO Cuenta VALUES(0, 'Gerardo', 'Gerardo@gmail.com', '93379', 'Vendedor', 'AV. 20 DE NOVIEMBRE NO 1053');
 INSERT INTO Cuenta VALUES(0, 'Jose', 'Jose@gmail.com', '93379', 'Vendedor','CALLE MATAMOROS NO.280');
 INSERT INTO Cuenta VALUES(0, 'Pedro', 'Pedro@gmail.com', '93379', 'Vendedor','AV. 5 DE MAYO NO. 1652');
 
 SELECT * FROM Cuenta;
-insert into Producto values (0,'Banderilla','Banderila mitad cheddar mitad salchicha, muy rico','25');
+insert into Producto values (0,'Banderilla','Banderilla mitad cheddar mitad salchicha, muy rico','25');
 insert into Producto values (0,'Torta de cochito','Torta con jamon, queso, sus verduras y cochito','25');
 insert into Producto values (0,'Torta de cochinita pibil','Torta con jamon, queso, sus verduras, rajas y cochinita pibil','30');
 insert into Producto values (0,'Choco-Flan','Un pastel imposible, donde la base es pastel de chocolate y la copa es de flan','12');
 
 delete from Pedido where id_pedido='12';
-
+SELECT *
+        FROM Pedido_producto
+        INNER JOIN producto
+        ON Pedido_producto.producto_id_producto=producto.id_producto;
 ##UPDATE Producto SET descripcion='Banderila mitad cheddar mitad salchicha, muy rico', costo='25' WHERE id_producto= '1';
 select * from Producto;
 select * from Cuenta;
-select * from Pedido;
+select * from Pedido; 	
+use proyectointegrador_fof;	 
 select * from Pedido_producto;
 DELETE FROM Pedido WHERE id_pedido='8';
+use proyectointegrador_fof;
 SELECT *
 FROM Pedido_producto
 INNER JOIN producto
-ON Pedido_producto.producto_id_producto=producto.id_producto WHERE producto_id_producto='3';
+ON Pedido_producto.producto_id_producto=producto.id_producto;
+SELECT *
+FROM Pedido_producto
+INNER JOIN pedido
+ON Pedido_producto.pedido_id_pedido=pedido.id_pedido;
 
 SELECT *
 FROM Pedido_producto
