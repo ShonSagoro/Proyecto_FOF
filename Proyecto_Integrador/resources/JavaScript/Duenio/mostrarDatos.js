@@ -6,7 +6,7 @@ const listaPedidos=document.getElementById('listaPedidos');
 let arbolPedidos=new Arbol();
 let arbolProductos=new Arbol();
 let cantidadTotalProductos=0;
-let cantidadPaga=0;
+let ganancia=0;
 
 const agregarDatosArbolPedidos=()=>{
     let query=`SELECT * FROM Pedido`;
@@ -20,49 +20,75 @@ const agregarDatosArbolPedidos=()=>{
                 }
             }
             arbolPedidos.mostrar_InOrden();
-            for(let i=0; i<arrayDatos.length;i++){
+            if(arrayDatos.length!==0){
+                for(let i=0; i<arrayDatos.length;i++){
+                    const productoR=document.createElement('div');
+                    productoR.textContent=`Pedido de: ${arrayDatos[i].nombre_pedido}|| Costo: $${arrayDatos[i].precio}.00`;
+                    listaPedidos.append(productoR);
+                }
+            }else{
                 const productoR=document.createElement('div');
-                productoR.textContent=`Pedido de: ${arrayDatos[i].nombre_pedido}|| Costo: $${arrayDatos[i].precio}.00`;
+                productoR.textContent=`Sin pedidos realizados`;
                 listaPedidos.append(productoR);
             }
+            
         }
 
     });
 }
 
+const colocarDatosProductos=()=>{
+    conexion.query(`SELECT * FROM Producto`,(error, rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+            arbolProductos.mostrar_InOrden();
+            if(arrayDatos.length!==0){
+                for(let i=0;i<arrayDatos.length;i++){
+                    const productoR=document.createElement('div');
+                    productoR.textContent=`Producto: ${arrayDatos[i].nombre}|| Cantidad: ${arrayDatos[i].cantidad}`;
+                    listaProducto.append(productoR);
+                }
+            }else{
+                const productoR=document.createElement('div');
+                    productoR.textContent=`Sin productos vendidos`;
+                    listaProducto.append(productoR);
+            }
+            
+        }
+    });
+}
 const agregarDatosArbolProductos=(producto)=>{
     for(let i=0;i<producto.length;i++){
         let cantidad=0;
-        let query=`SELECT *
+        let query=`
+        SELECT *
         FROM Pedido_producto
         INNER JOIN producto
-        ON Pedido_producto.producto_id_producto=producto.id_producto WHERE nombre='${producto[i]}'`;
+        ON Pedido_producto.producto_id_producto=producto.id_producto
+        INNER JOIN pedido
+        ON Pedido_producto.pedido_id_pedido=pedido.id_pedido 
+        WHERE nombre='${producto[i]}';
+        `;
         conexion.query(query,(error, rows, fields)=>{
             if(error){
                 throw error;
             }else{
-                for(let i=0;i<rows.length;i++){
-                    cantidad+=parseInt(rows[i].cantidad_producto);
+                if(rows.length!==0){
+                    for(let i=0;i<rows.length;i++){
+                        if(rows[i].estado==='completado'){
+                            cantidad+=parseInt(rows[i].cantidad_producto);  
+                        }
+                    }
                 }
+                
                 let productoArbol={nombre:producto[i], cantidad: cantidad}
                 arbolProductos.add(producto[i], productoArbol);
             }
         });
     }
-    conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
-        if(error){
-            throw error;
-        }else{
-            arbolProductos.mostrar_InOrden();
-            console.log(arrayDatos);
-            for(let i=0;i<arrayDatos.length;i++){
-                const productoR=document.createElement('div');
-                productoR.textContent=`Producto: ${arrayDatos[i].nombre}|| Cantidad: ${arrayDatos[i].cantidad}`;
-                listaProducto.append(productoR);
-            }
-        }
-    });
-    
+    colocarDatosProductos();
+    agregarCantidadProductos();
 }
 
 const agregarDatosProductoArray=()=>{
@@ -80,17 +106,22 @@ const agregarDatosProductoArray=()=>{
     });
 }
 
-const calcularCantidadProductos=()=>{
-    let query=`SELECT * FROM pedido_producto`;
+const agregarCantidadProductos=()=>{
+    let query=`SELECT * FROM Producto`;
     conexion.query(query,(error, rows, fields)=>{
         if(error){
             throw error;
         }else{
-            for(let i=0;i<rows.length; i++){
-                cantidadTotalProductos+=parseInt(rows[i].cantidad_producto);
+            arbolProductos.mostrar_InOrden();
+            if(arrayDatos.length!==0){
+                for(let i=0;i<arrayDatos.length;i++){
+                    cantidadTotalProductos+=parseInt(arrayDatos[i].cantidad);
+                }
+                document.getElementById('textCantidsadProducto').innerHTML=cantidadTotalProductos;
+                cantidadTotalProductos=0;
+            }else{
+                document.getElementById('textCantidsadProducto').innerHTML=0;
             }
-            document.getElementById('textCantidsadProducto').innerHTML=cantidadTotalProductos;
-            cantidadTotalProductos=0;
         }
     });
 }
@@ -101,13 +132,17 @@ const agregarCantidadPedidos=()=>{
         if(error){
             throw error;    
         }else{
-            document.getElementById('textCantidadPedidos').innerHTML=parseInt(rows.length);
-            for(let i=0; i<rows.length; i++){
-                cantidadPaga+=parseInt(rows[i].precio);
+            let cantidadPedidos=0;
+            for(let i=0;i<rows.length;i++){
+                if(rows[i].estado==='completado'){
+                    ganancia+=parseInt(rows[i].precio);
+                    cantidadPedidos++;
+                }
             }
-            document.getElementById('txtPrecioG').innerHTML=`$${cantidadPaga}.00`;
-            document.getElementById('txtGanancia').innerHTML=`$${cantidadPaga}.00`;
-            cantidadPaga=0;
+            document.getElementById('textCantidadPedidos').innerHTML=parseInt(cantidadPedidos);
+            document.getElementById('txtPrecioG').innerHTML=`$${ganancia}.00`;
+            document.getElementById('txtGanancia').innerHTML=`$${ganancia}.00`;
+            ganancia=0;
         }
     });
 }
@@ -117,7 +152,6 @@ const obtenerfecha=()=>{
     let mes=date.getMonth();
     let dia=date.getDate();
     let year = date.getFullYear();
-    // let fecha=`'${date.getFullYear()}-${mes}-${dia}'`;
     document.getElementById('current_date').innerHTML=(dia + " de " + nombrarMeses[mes] + " del " + year);
 }
 
@@ -132,12 +166,11 @@ const mostrarPerfil=()=>{
 }
 
 const main=()=>{
-    calcularCantidadProductos();
-    agregarCantidadPedidos(); 
     agregarDatosArbolPedidos();
+    agregarDatosProductoArray();
+    agregarCantidadPedidos(); 
     obtenerfecha();
     mostrarPerfil();
-    agregarDatosProductoArray();
     
 }
 

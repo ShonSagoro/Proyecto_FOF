@@ -60,7 +60,7 @@ const buscarProductoReem=producto=>{
                 let descripcionReem=document.getElementById('DescripcionPR').value;
                 let precioReem=document.getElementById('txtPrecioNuevo').value;
                 if(descripcionReem!='' && precioReem!=''){
-                    if(descripcionReem!==rows[0].descripcion || precioReem!==rows[0].costo){
+                    if(descripcionReem!==rows[0].descripcion && precioReem!==rows[0].costo){
                         conexion.query("UPDATE Producto SET descripcion='"+descripcionReem+"', costo='"+precioReem+"' WHERE id_producto= '"+rows[0].id_producto+"'", (error)=>{
                             if(error){
                                 throw error;
@@ -74,6 +74,30 @@ const buscarProductoReem=producto=>{
                     }else{
                         document.getElementById('verificarAccion').innerHTML="No necesita cambiar, los datos son iguales";
                     }
+                }else if(descripcionReem!=''&&precioReem==''){
+                    let precioN=rows[0].costo;
+                    conexion.query("UPDATE Producto SET descripcion='"+descripcionReem+"' WHERE id_producto= '"+rows[0].id_producto+"'", (error)=>{
+                        if(error){
+                            throw error;
+                        }else{
+                            document.getElementById('DescripcionPR').value='';
+                            document.getElementById('txtPrecioNuevo').value='';
+                            document.getElementById('txtDescripcionB').innerHTML=descripcionReem;
+                            document.getElementById('txtPrecioB').innerHTML="$"+precioN+".00";
+                        }
+                    });
+                }else if(descripcionReem==''&&precioReem!=''){
+                    let descripcionN=rows[0].descripcion;
+                    conexion.query("UPDATE Producto SET costo='"+precioReem+"' WHERE id_producto= '"+rows[0].id_producto+"'", (error)=>{
+                        if(error){
+                            throw error;
+                        }else{
+                            document.getElementById('DescripcionPR').value='';
+                            document.getElementById('txtPrecioNuevo').value='';
+                            document.getElementById('txtDescripcionB').innerHTML=descripcionN;
+                            document.getElementById('txtPrecioB').innerHTML="$"+precioReem+".00";
+                        }
+                    });
                 }else{
                     document.getElementById('verificarAccion').innerHTML="INGRESE DATOS A REEMPLAZAR";
                 }

@@ -4,6 +4,7 @@ const lista=document.querySelector('#PedidoActual');
 const btnCompletarPedido=document.querySelector('#pedidoCompletado');
 let arbolPedidos=new Arbol();
 
+
 const cargarPedido=()=>{
     conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
         if(error){
@@ -106,7 +107,7 @@ const agregarLista=()=>{
 }
 agregarLista();
 
-const elminarPedidoArbol=(nombreNodo)=>{
+const elminarPedidoArbol=(nombreNodo, nodo)=>{
     arbolPedidos.eliminar(nombreNodo);
     agregarLista();
 }
@@ -118,14 +119,13 @@ btnCompletarPedido.addEventListener('click', ()=>{
             if(error){
                 throw error;
             }else{
-    
                 arbolPedidos.mostrar_PreOrden();
                 //solo hara una unica vez el sacar los datos
                 if(arrayDatos[0].estado!=='completado' && arrayDatos.length!==0){
                     //cambiamos el estado
                     let estado="completado";
                     cambiar_estado(estado, arrayDatos[0].id_pedido);
-                    elminarPedidoArbol(arrayDatos[0].nombre_pedido); 
+                    elminarPedidoArbol(arrayDatos[0].nombre_pedido, arrayDatos[0]); 
                 }          
             }
         });

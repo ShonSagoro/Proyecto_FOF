@@ -1,3 +1,30 @@
+const conexion=require('../../../conectar.js');
+
+const GuardarVenta=(fecha)=>{
+    conexion.query(`SELECT * FROM Venta WHERE fecha='${fecha}'`,(error,rows, fields)=>{
+        if(error){
+            throw error;
+        }else{
+            let gananciaSimbolo=document.getElementById('txtGanancia').textContent;
+            let gananciatxt=gananciaSimbolo.slice(1, gananciaSimbolo.length);
+            if(rows.length===0){
+                conexion.query(`INSERT INTO Venta VALUES(0,'${gananciatxt}','${fecha}')`,(error)=>{
+                    if(error){
+                        throw error;
+                    }
+                });
+            }else{
+                conexion.query(`UPDATE Venta SET ganancia='${gananciatxt}' WHERE fecha='${fecha}'`,(err)=>{
+                    if(err){
+                        throw error;
+                    }
+                });
+            }
+        }
+    })
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
     // Escuchamos el click del botón
     
@@ -36,12 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.log(err))
             .finally()
             .then(() => {
-                console.log("Guardado!")   
             })  
             setTimeout(()=>{
                 document.querySelector("#btnCrearPdf").value=valorbtnC;
                 document.querySelector("#btnRegresar").value=valorbtnR;
             },5000);
+            GuardarVenta(fecha);
         });
-    
+        
 });

@@ -3,6 +3,7 @@ import {Arbol, arrayDatos} from '../ArbolBinario/arbol.js';
 const lista=document.querySelector('#orden_pedido');
 let arbolPedidos=new Arbol();
 
+
 //actualizar arbol
 const cargarPedido=()=>{
     conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
@@ -14,6 +15,7 @@ const cargarPedido=()=>{
                 //los pedidos no deben estar completos y deben existir
                 if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado!=='completado'){
                   arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
+                  //y si hay pedido completados pues que los guarde de una vez
                 }
             }
         }
@@ -65,37 +67,6 @@ const buscarIdProducto=(idPedido, nombrePedido)=>{
     });
 }
 
-const hacerCorte=()=>{
-    let vendido=0;
-    conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
-        if(error){
-            throw error;
-        }else{
-            let long=rows.length;
-            for(let i=0;i<long;i++){
-                if(arbolPedidos.buscar_dato(rows[i].nombre_pedido)===null && rows[i].estado==='completado'){
-                  arbolPedidos.add(rows[i].nombre_pedido,rows[i]);
-                }
-            }
-            arbolPedidos.mostrar_PreOrden();
-            for(let i=0;i<arrayDatos.length;i++){
-                vendido+=arrayDatos[i].precio;
-            }
-            let date=new Date();
-            // let fecha=`'${date.getFullYear()}-${date.getMonth()}-${date.getDate()}'`;
-            let mes=(date.getMonth()<10)? '0'+date.getMonth(): date.getMonth();
-            let dia=(date.getDate()<10)?'0'+date.getDate(): date.getDate();
-            let fecha=`'${date.getFullYear()}-${mes}-${dia}'`;
-            conexion.query(`INSERT INTO Venta VALUES(0,'${vendido}',${fecha})`,(error, rows,fields)=>{
-                if(error){
-                    throw error;
-                }
-            });
-            
-        }
-    });
-}
-
 const agregarLista=()=>{
     //query para que funcione el arbol
     conexion.query(`SELECT * FROM Pedido`,(error, rows, fields)=>{
@@ -106,6 +77,7 @@ const agregarLista=()=>{
             //solo hara una unica vez el sacar los datos
             if(arrayDatos.length!==0){
                 for(let i=0; i<arrayDatos.length;i++){
+                    //doble seguridad 
                     if(arrayDatos[0].estado!=='completado'){
                         //buscamos el id de los productos para agregar los datos
                         buscarIdProducto(arrayDatos[i].id_pedido, arrayDatos[i].nombre_pedido); 
@@ -118,8 +90,6 @@ const agregarLista=()=>{
                     </li>
                 `;
                 lista.insertAdjacentHTML("beforeend",elemento);
-
-                //!hacerCorte();
             }          
         }
     });
