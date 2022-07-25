@@ -13,12 +13,19 @@ botonBuscarVendedor.addEventListener('click',()=>{
 
 
 const buscarPuntoVenta=nombreV=>{
-    conexion.query(`SELECT ubicacion FROM Cuenta WHERE usuario='${nombreV}' AND rol='Vendedor'`,(error, rows, fields)=>{
+    conexion.query(`SELECT * FROM Cuenta WHERE usuario='${nombreV}'`,(error, rows, fields)=>{
         if(error){
             throw error;
         }else{
-            if(rows.lenght!==0){
-                document.getElementById('txtLocalizacionV').innerHTML=rows[0].ubicacion;            }
+            if(rows.length!==0){
+                if( rows[0].rol==='Vendedor'){
+                    document.getElementById('txtLocalizacionV').innerHTML=rows[0].ubicacion;            
+                }else{
+                    document.getElementById('txtLocalizacionV').innerHTML="NO ES VENDEDOR";                               
+                }
+            }else{
+                document.getElementById('txtLocalizacionV').innerHTML="NO EXISTE";            
+            }
         }
     });
 

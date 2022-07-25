@@ -6,6 +6,7 @@ const btnEliminar=document.querySelector('#pedidoEliminar');
 const btnModificar=document.querySelector('#pedidoModificar');
 let pagoTotal=0;
 let producto=[];
+let bandera=0;
 
 let arbolPedidos=new Arbol();
 btnEliminar.disable=true;
@@ -115,6 +116,7 @@ const vaciarPedido=()=>{
 
 btnBuscar.addEventListener('click',()=>{
     vaciarPedido();
+    bandera=1;
     document.getElementById('precioPedidoB').innerHTML="00.00";
     let nombreP=document.getElementById('BuscarTxt').value;
     if(nombreP!==''){
@@ -228,7 +230,8 @@ btnModificar.addEventListener('click',()=>{
     document.getElementById('txtVerificar').innerHTML='';
     let nombreM=document.getElementById('BuscarTxt').value;
     let cantidad=0;
-    conexion.query(`SELECT * FROM Pedido`, (error, rows, fields)=>{
+    if(nombreM!==''&&bandera!==0){
+        conexion.query(`SELECT * FROM Pedido`, (error, rows, fields)=>{
         if(error){
             throw error;
         }else{
@@ -268,11 +271,18 @@ btnModificar.addEventListener('click',()=>{
         }
         }
     });
+    }else{
+        document.getElementById('txtVerificar').innerHTML="Primero busque el producto";
+        setTimeout(() => {
+            document.getElementById('txtVerificar').innerHTML=''; 
+        }, 2000);
+    }
+    bandera=0;
 });
 
 btnEliminar.addEventListener('click',()=>{
     let nombreM=document.getElementById('BuscarTxt').value;
-    if(nombreM!==""){
+    if(nombreM!==""&& bandera!==0){
         conexion.query(`DELETE FROM Pedido WHERE nombre_pedido='${nombreM}';`,(error,rows,fields)=>{
             if(error){
                 throw error;
@@ -282,6 +292,7 @@ btnEliminar.addEventListener('click',()=>{
                 }
                 document.getElementById('txtVerificar').innerHTML="PEDIDO ELIMINADO";
                 document.getElementById('BuscarTxt').value='ELIMINADO';
+                document.getElementById('precioPedidoB').innerHTML='00.00';
                 vaciarPedido();
                 setTimeout(() => {
                     document.getElementById('txtVerificar').innerHTML=''; 
@@ -291,9 +302,10 @@ btnEliminar.addEventListener('click',()=>{
     
         });
     }else{
-        document.getElementById('txtVerificar').innerHTML="Error";
+        document.getElementById('txtVerificar').innerHTML="Primero busque el producto";
             setTimeout(() => {
                 document.getElementById('txtVerificar').innerHTML=''; 
             }, 2000);
     }
+    bandera=0;
 });

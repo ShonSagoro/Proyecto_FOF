@@ -2,6 +2,7 @@ const conexion=require('../../../conectar.js');
 const botonBuscar=document.querySelector('#buscarProducto');
 const botonReemplazar=document.querySelector('#btnReemplazar');
 const botonEliminar=document.querySelector('#btnEliminar');
+let bandera=0;
 
 
 const Contador_caracteres=()=>{
@@ -11,6 +12,7 @@ const Contador_caracteres=()=>{
 
 
 botonBuscar.addEventListener('click',()=>{  
+    bandera=1;
     let nombreBuscar=document.getElementById('BuscarTxt').value;
     if(nombreBuscar!==''){
         buscarProducto(nombreBuscar);
@@ -43,12 +45,12 @@ const vaciarDatos=()=>{
 
 botonReemplazar.addEventListener('click',()=>{
     let nombreBuscarReem=document.getElementById('BuscarTxt').value;
-    if(nombreBuscarReem!=''){
+    if(nombreBuscarReem!=''&&bandera!=0){
         buscarProductoReem(nombreBuscarReem);
     }else{
         document.getElementById('verificarAccion').innerHTML="Busque el producto primero";
     }
-   
+   bandera=0;
 });
 
 const buscarProductoReem=producto=>{
@@ -101,23 +103,24 @@ const buscarProductoReem=producto=>{
                 }else{
                     document.getElementById('verificarAccion').innerHTML="INGRESE DATOS A REEMPLAZAR";
                 }
-            }else{
-                document.getElementById('txtDescripcionB').innerHTML="NO EXISTE";
-                document.getElementById('txtPrecioB').innerHTML="NO EXISTE";
-            }
+        }else{
+            document.getElementById('txtDescripcionB').innerHTML="NO EXISTE";
+            document.getElementById('txtPrecioB').innerHTML="NO EXISTE";
+        }
     }
     });
 }
 
 botonEliminar.addEventListener('click',()=>{
     let nombreBuscarEl=document.getElementById('BuscarTxt').value;
-    if(nombreBuscarEl!=''){
+    if(nombreBuscarEl!=''&& bandera!=0){
         document.getElementById('DescripcionPR').value  ='';
         document.getElementById('txtPrecioNuevo').value=''
         buscarProductoELiminar(nombreBuscarEl);
     }else{
         document.getElementById('verificarAccion').innerHTML="Busque el producto primero";
     }
+    bandera=0;
     
 });
 

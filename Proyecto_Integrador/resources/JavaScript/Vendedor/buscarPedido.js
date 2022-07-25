@@ -8,6 +8,9 @@ botonBuscarPedido.addEventListener('click',()=>{
         buscarProducto(textoBuscar);
     }else{
         document.getElementById('verificacionTXT').innerHTML='INGRESE EL NOMBRE DEL PEDIDO';
+        setTimeout(()=>{
+            document.getElementById('verificacionTXT').innerHTML='';
+        },5000);
     }
 });
 
@@ -16,9 +19,14 @@ const buscarProducto=(pedido)=>{
         if(error){
             throw error;
         }else{
-            if(rows.lenght!==0){
+            if(rows.length!==0){
                 document.getElementById('txtLocalizacion').innerHTML=rows[0].ubicacion;
                 document.getElementById('txtEstado').innerText=rows[0].estado;
+            }else{
+                document.getElementById('verificacionTXT').innerHTML='No existe';
+                setTimeout(()=>{
+                    document.getElementById('verificacionTXT').innerHTML='';
+                },5000);
             }
         }
     });
